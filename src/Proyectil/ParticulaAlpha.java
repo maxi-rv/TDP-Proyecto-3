@@ -4,10 +4,10 @@ public class ParticulaAlpha extends Particula
 {
 
 	@Override
-	public void destruirse() 
+	public void moverse() 
 	{
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 }

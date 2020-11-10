@@ -17,7 +17,7 @@ public class PocionVida  extends ObjetoPrecioso
 	}
 
 	@Override
-	public void destruirse() 
+	public void moverse() 
 	{
 		// TODO Auto-generated method stub
 		

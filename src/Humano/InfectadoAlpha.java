@@ -15,9 +15,9 @@ public class InfectadoAlpha extends Infectado
 	{
 		
 	}
-	
+
 	@Override
-	public void destruirse() 
+	public void moverse() 
 	{
 		// TODO Auto-generated method stub
 		

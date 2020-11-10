@@ -9,10 +9,9 @@ public class InfectadoBeta extends Infectado
 	{
 		this.arma = ar;
 	}
-	
-	//METODOS
+
 	@Override
-	public void destruirse() 
+	public void moverse() 
 	{
 		// TODO Auto-generated method stub
 		

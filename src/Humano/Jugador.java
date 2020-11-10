@@ -15,9 +15,9 @@ public class Jugador extends Humano
 	{
 		this.cargaViral = this.cargaViral + damage;
 	}
-	
+
 	@Override
-	public void destruirse() 
+	public void moverse() 
 	{
 		// TODO Auto-generated method stub
 		

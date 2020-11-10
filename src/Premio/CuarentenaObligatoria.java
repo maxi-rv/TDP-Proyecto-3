@@ -17,7 +17,7 @@ public class CuarentenaObligatoria extends EfectoTemporal
 	}
 
 	@Override
-	public void destruirse() 
+	public void moverse() 
 	{
 		// TODO Auto-generated method stub
 		

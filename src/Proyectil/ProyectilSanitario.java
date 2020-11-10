@@ -4,10 +4,10 @@ public class ProyectilSanitario extends Proyectil
 {
 
 	@Override
-	public void destruirse() 
+	public void moverse() 
 	{
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 }
