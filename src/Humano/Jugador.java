@@ -11,9 +11,9 @@ public class Jugador extends Humano
 	}
 	
 	//METODOS
-	public void aumentarCargaViral(int daño)
+	public void aumentarCargaViral(int damage)
 	{
-		this.cargaViral = this.cargaViral + daño;
+		this.cargaViral = this.cargaViral + damage;
 	}
 	
 	@Override
