@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 public class Juego 
 {
 	//ATRIBUTOS
-	protected Juego instancia;
+	protected static Juego instancia;
 	protected Nivel nivelActual;
 	protected Mapa mapaActual;
 	protected LinkedList<Entidad> entidades;
@@ -18,7 +18,7 @@ public class Juego
 	}
 	
 	//METODOS
-	public Juego obtenerInstancia()
+	public static Juego obtenerInstancia()
 	{
 		if (instancia == null)
 		{
