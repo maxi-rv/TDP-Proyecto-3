@@ -1,16 +1,13 @@
-package Juego;
+package ControlJugador;
 
 import java.awt.event.KeyListener;
 
-public class ControlJugador 
+import Humano.Jugador;
+
+public abstract class ControlJugador 
 {
 	//ATRIBUTOS
-	protected Entidad jugador;
+	protected Jugador jugador;
 	protected KeyListener listenerIzq;
 	protected KeyListener listenerDer;
-	
-	public ControlJugador(Entidad jugador)
-	{
-		
-	}
 }

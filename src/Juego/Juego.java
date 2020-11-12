@@ -30,6 +30,6 @@ public class Juego
 	
 	public JPanel getMapa()
 	{
-		return mapaActual;
+		return mapaActual.getPanel();
 	}
 }

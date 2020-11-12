@@ -34,18 +34,9 @@ public class Nivel
 		return tandaActual;
 	}
 
-	public void setTandaActual(int tandaActual) 
+	public boolean quedanTandas()
 	{
-		this.tandaActual = tandaActual;
+		return false;
 	}
-
-	public int[] getTandas() 
-	{
-		return Tandas;
-	}
-
-	public void setTandas(int[] tandas) 
-	{
-		Tandas = tandas;
-	}
+	
 }

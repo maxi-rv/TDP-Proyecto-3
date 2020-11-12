@@ -3,10 +3,12 @@ package GUI;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class GUI {
 
 	private JFrame frame;
+	private JPanel panelMapa;
 	
 	//HOLA!
 	
