@@ -3,6 +3,8 @@ package Humano;
 import javax.swing.JLabel;
 
 import Arma.ArmaSanitaria;
+import Proyectil.Proyectil;
+import Visitor.Visitor;
 
 public class Jugador extends Humano
 {
@@ -26,45 +28,73 @@ public class Jugador extends Humano
 	}
 
 	@Override
-	public JLabel getContenedorGrafico() {
+	public JLabel getContenedorGrafico() 
+	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public int getPosX() {
+	public int getPosX() 
+	{
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int getPosY() {
+	public int getPosY() 
+	{
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public void setPosX(int x) {
+	public void setPosX(int x) 
+	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void setPosY(int y) {
+	public void setPosY(int y) 
+	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void setLimitePosX(int x) {
+	public void setLimitePosX(int x) 
+	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void setLimitePosY(int y) {
+	public void setLimitePosY(int y) 
+	{
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void aceptar(Visitor v) 
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getVelocidad() 
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Proyectil disparar() 
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

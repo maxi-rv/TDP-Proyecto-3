@@ -3,6 +3,7 @@ package Juego;
 import javax.swing.JLabel;
 
 import ContenedorGrafico.ContenedorGrafico;
+import Visitor.Visitor;
 
 public abstract class Entidad 
 {
@@ -15,6 +16,8 @@ public abstract class Entidad
 	protected ContenedorGrafico contenedorGrafico;
 	
 	//METODOS
+	public abstract void aceptar(Visitor v);
+	
 	public abstract void moverse();
 	
 	public abstract JLabel getContenedorGrafico();
@@ -29,5 +32,9 @@ public abstract class Entidad
 	
 	public abstract void setLimitePosX(int x);
 	
-	public abstract void setLimitePosY(int y);
+	public abstract void setLimitePosY(int y);	
+	
+	public abstract int getVelocidad();
+	
+	
 }

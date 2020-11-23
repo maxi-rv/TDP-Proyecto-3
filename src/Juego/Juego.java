@@ -3,6 +3,10 @@ package Juego;
 import java.util.LinkedList;
 import javax.swing.JPanel;
 
+/**
+ * Clase Juego.
+ * @author Alexia Camila Hernandez, Mauro Pereyra, Maximiliano Riquelme Vera
+ */
 public class Juego 
 {
 	//ATRIBUTOS
