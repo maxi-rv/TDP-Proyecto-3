@@ -51,8 +51,8 @@ public class Juego
 			{
 				Entidad infectado = fabricaInfectado.crearEntidad();
 				
-				infectado.setLimitePosX(randomNumGen.nextInt(mapaActual.getLimiteX())); //SETEA UNA POSICION RANDOM
-				infectado.setLimitePosY(5);
+				infectado.setLimiteX(randomNumGen.nextInt(mapaActual.getLimiteX())); //SETEA UNA POSICION RANDOM
+				infectado.setLimiteY(5);
 				
 				entidades.addLast(infectado);
 				

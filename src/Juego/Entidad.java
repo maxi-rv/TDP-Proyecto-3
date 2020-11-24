@@ -20,21 +20,54 @@ public abstract class Entidad
 	
 	public abstract void moverse();
 	
-	public abstract JLabel getContenedorGrafico();
-	
-	public abstract int getPosX();
-	
-	public abstract int getPosY();
-	
-	public abstract void setPosX(int x);
-	
-	public abstract void setPosY(int y);
-	
-	public abstract void setLimitePosX(int x);
-	
-	public abstract void setLimitePosY(int y);	
-	
-	public abstract int getVelocidad();
+	public JLabel getContenedorGrafico()
+	{
+		return contenedorGrafico;
+	}
+
+	public int getPosX() 
+	{
+		return posX;
+	}
+
+	public void setPosX(int posX) 
+	{
+		this.posX = posX;
+	}
+
+	public int getPosY() 
+	{
+		return posY;
+	}
+
+	public void setPosY(int posY) 
+	{
+		this.posY = posY;
+	}
+
+	public int getLimiteX() 
+	{
+		return limiteX;
+	}
+
+	public void setLimiteX(int limiteX) 
+	{
+		this.limiteX = limiteX;
+	}
+
+	public int getLimiteY() {
+		return limiteY;
+	}
+
+	public void setLimiteY(int limiteY) 
+	{
+		this.limiteY = limiteY;
+	}
+
+	public int getVelocidad() 
+	{
+		return velocidad;
+	}
 	
 	
 }

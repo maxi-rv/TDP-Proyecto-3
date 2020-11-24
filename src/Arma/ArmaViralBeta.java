@@ -1,6 +1,7 @@
 package Arma;
 
 import Proyectil.ParticulaBeta;
+import Proyectil.Proyectil;
 
 public class ArmaViralBeta extends ArmaViral
 {
@@ -12,10 +13,9 @@ public class ArmaViralBeta extends ArmaViral
 	
 	//METODOS
 	@Override
-	public void disparar() 
+	public Proyectil disparar(int x, int y) 
 	{
-		// TODO Auto-generated method stub
-		
+		return proyectil;
 	}
 	
 	

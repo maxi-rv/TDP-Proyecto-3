@@ -1,5 +1,6 @@
 package Arma;
 
+import Proyectil.Proyectil;
 import Proyectil.ProyectilSanitario;
 
 public class ArmaSanitaria extends Arma
@@ -12,9 +13,9 @@ public class ArmaSanitaria extends Arma
 	
 	//METODOS
 	@Override
-	public void disparar() 
+	public Proyectil disparar(int x, int y) 
 	{
-		
+		return proyectil;
 	}
 
 }

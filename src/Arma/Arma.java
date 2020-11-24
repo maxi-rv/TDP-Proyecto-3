@@ -10,5 +10,5 @@ public abstract class Arma
 	protected Proyectil proyectil;
 	
 	//METODOS
-	public abstract void disparar();
+	public abstract Proyectil disparar(int x, int y);
 }
