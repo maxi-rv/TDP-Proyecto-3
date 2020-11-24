@@ -1,7 +1,5 @@
 package Proyectil;
 
-import javax.swing.JLabel;
-
 import Visitor.Visitor;
 
 public class ParticulaBeta extends Particula

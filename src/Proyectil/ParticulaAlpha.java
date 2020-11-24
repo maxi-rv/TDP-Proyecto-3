@@ -1,7 +1,5 @@
 package Proyectil;
 
-import javax.swing.JLabel;
-
 import Visitor.Visitor;
 
 public class ParticulaAlpha extends Particula
@@ -32,7 +30,6 @@ public class ParticulaAlpha extends Particula
 	@Override
 	public Proyectil clonar() 
 	{
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

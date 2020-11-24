@@ -1,7 +1,5 @@
 package Premio;
 
-import javax.swing.JLabel;
-
 import Visitor.Visitor;
 
 public class CuarentenaObligatoria extends EfectoTemporal
