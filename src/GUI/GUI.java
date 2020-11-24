@@ -5,23 +5,32 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import Juego.Juego;
+
 public class GUI {
 
-	private JFrame frame;
+	private JFrame frmRobotVsInfectados;
 	private JPanel panelMapa;
+	private Juego juego;
 	
 	//HOLA!
 	
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
+	public static void main(String[] args) 
+	{
+		EventQueue.invokeLater(new Runnable() 
+		{
+			public void run() 
+			{
+				try 
+				{
 					GUI window = new GUI();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
+					window.frmRobotVsInfectados.setVisible(true);
+				} 
+				catch (Exception e) 
+				{
 					e.printStackTrace();
 				}
 			}
@@ -31,17 +40,33 @@ public class GUI {
 	/**
 	 * Create the application.
 	 */
-	public GUI() {
+	public GUI() 
+	{
 		initialize();
+		iniciarJuego();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	private void initialize() 
+	{
+		frmRobotVsInfectados = new JFrame();
+		frmRobotVsInfectados.setTitle("Robot vs Infectados");
+		frmRobotVsInfectados.setResizable(false);
+		frmRobotVsInfectados.setBounds(100, 100, 640, 480);
+		frmRobotVsInfectados.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
+	/*
+	 * 
+	 */
+	private void iniciarJuego() 
+	{
+		juego = Juego.obtenerInstancia();
+		panelMapa = juego.getMapa();
+		
+		//QUE MAS???
 	}
 
 }

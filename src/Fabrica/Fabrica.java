@@ -1,5 +1,7 @@
 package Fabrica;
 
+import Juego.Entidad;
+
 public abstract class Fabrica 
 {
 	//ATRIBUTOS
@@ -7,5 +9,5 @@ public abstract class Fabrica
 	protected int limiteY;
 	
 	//METODOS
-	public abstract void crearEntidad();
+	public abstract Entidad crearEntidad();
 }
