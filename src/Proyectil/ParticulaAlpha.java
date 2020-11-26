@@ -16,21 +16,17 @@ public class ParticulaAlpha extends Particula
 	@Override
 	public void moverse() 
 	{
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void aceptar(Visitor v) 
 	{
-		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public Proyectil clonar() 
-	{
-		return null;
-	}
 	
+	public Proyectil clone()
+	{
+		return new ParticulaAlpha();
+	}
 }

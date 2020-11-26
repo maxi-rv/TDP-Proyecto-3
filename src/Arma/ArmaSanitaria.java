@@ -5,7 +5,9 @@ import Proyectil.ProyectilSanitario;
 
 public class ArmaSanitaria extends Arma
 {
-	//CONSTRUCTOR
+	/*
+	 * Crea una instancia de ArmaSanitaria
+	 */
 	public ArmaSanitaria(ProyectilSanitario pr)
 	{
 		this.proyectil = pr;
@@ -15,7 +17,7 @@ public class ArmaSanitaria extends Arma
 	@Override
 	public Proyectil disparar(int x, int y) 
 	{
-		return proyectil;
+		return proyectil.clone();
 	}
 
 }

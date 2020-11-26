@@ -15,7 +15,7 @@ public class ArmaViralBeta extends ArmaViral
 	@Override
 	public Proyectil disparar(int x, int y) 
 	{
-		return proyectil;
+		return proyectil.clone();
 	}
 	
 	
