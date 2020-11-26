@@ -1,7 +1,6 @@
 package Arma;
 
 import Proyectil.ParticulaBeta;
-import Proyectil.Proyectil;
 
 public class ArmaViralBeta extends ArmaViral
 {
@@ -10,13 +9,4 @@ public class ArmaViralBeta extends ArmaViral
 	{
 		this.proyectil = pr;
 	}
-	
-	//METODOS
-	@Override
-	public Proyectil disparar(int x, int y) 
-	{
-		return proyectil;
-	}
-	
-	
 }

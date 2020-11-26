@@ -8,10 +8,10 @@ public abstract class Proyectil extends Entidad
 	protected int damage;
 	
 	//METODOS
-	public abstract Proyectil clonar();
-	
 	public int getDamage()
 	{
 		return damage;
 	}
+	
+	public abstract Proyectil clone();
 }
