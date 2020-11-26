@@ -10,5 +10,11 @@ public abstract class Arma
 	protected Proyectil proyectil;
 	
 	//METODOS
-	public abstract Proyectil disparar(int x, int y);
+	public Proyectil disparar(int x, int y) 
+	{
+		Proyectil proy = proyectil.clone();
+		proy.setPosX(x);
+		proy.setPosY(y);
+		return proy;
+	}
 }
