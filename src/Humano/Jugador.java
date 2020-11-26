@@ -21,23 +21,44 @@ public class Jugador extends Humano
 	}
 
 
-	public void moverse() 
-	{
-		// TODO Auto-generated method stub
+	public void moverse(String direccion){
+		mover(direccion);
 		
 	}
 
 	public void aceptar(Visitor v) 
 	{
-		// TODO Auto-generated method stub
+		
 		
 	}	
 
 	
-	public Proyectil disparar() 
-	{
-		// TODO Auto-generated method stub
+	public Proyectil disparar()	{
+		
 		return null;
 	}
+	
+	private void mover(String direccion){	
+		
+		
+		if(direccion == "Izquierda"){
+			if(Math.abs(posY) < Math.abs(limiteY))
+				setPosY(posY-5);
+		}
+
+		if(direccion == "Derecha"){
+			if(Math.abs(posY) < Math.abs(limiteY))
+				setPosY(posY+5);
+		}
+		
+		actualizar(posX,posY);
+		
+	}
+	
+	private void actualizar(int posX,int posY){
+		this.contenedorGrafico.actualizar(posX,posY);
+	}
+	
+	public void moverse() {}
 
 }

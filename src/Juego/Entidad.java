@@ -22,7 +22,7 @@ public abstract class Entidad
 	
 	public JLabel getContenedorGrafico()
 	{
-		return contenedorGrafico;
+		return contenedorGrafico.getLabel();
 	}
 
 	public int getPosX() 

@@ -1,6 +1,8 @@
 package GUI;
 
 import java.awt.EventQueue;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -56,6 +58,10 @@ public class GUI {
 		frmRobotVsInfectados.setResizable(false);
 		frmRobotVsInfectados.setBounds(100, 100, 640, 480);
 		frmRobotVsInfectados.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		KeyListener escucha = new EscuchaTeclado();
+		panelMapa.addKeyListener(escucha);
+		
 	}
 	
 	/*
@@ -67,6 +73,51 @@ public class GUI {
 		panelMapa = juego.getMapa();
 		
 		//QUE MAS???
+	}
+	
+	
+	
+	public void mover(String direccion){
+		
+		
+	}
+	
+	public void disparar(){
+		
+		
+	}
+	
+	private class EscuchaTeclado implements KeyListener{
+		
+		public void keyPressed(KeyEvent e) {
+			actuar(e);
+		}
+
+		public void keyTyped(KeyEvent e) {
+			actuar(e);
+			
+		}
+		
+		private void actuar(KeyEvent e){			
+			
+			if(e.getExtendedKeyCode() == KeyEvent.VK_KP_LEFT){
+				juego.moverJugador("Izquierda");
+			}
+
+			if(e.getExtendedKeyCode() == KeyEvent.VK_KP_RIGHT){
+				juego.moverJugador("Derecha");
+			}
+			
+			if(e.getExtendedKeyCode() == KeyEvent.VK_SPACE){
+				juego.disparaJugador();
+			}
+		}
+
+
+		
+		public void keyReleased(KeyEvent e) {}
+		
+		
 	}
 
 }

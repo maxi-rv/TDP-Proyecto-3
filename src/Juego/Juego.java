@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 import Fabrica.Fabrica;
 import Fabrica.FabricaInfectado;
 import Fabrica.FabricaJugador;
+import Humano.Jugador;
+
 
 /**
  * Clase Juego.
@@ -20,18 +22,18 @@ public class Juego
 	protected Nivel nivelActual;
 	protected Mapa mapaActual;
 	protected LinkedList<Entidad> entidades;
-	protected Entidad jugador;
+	protected Jugador jugador;
 	
 	//CONSTRUCTOR
-	protected Juego()
-	{
+	protected Juego(){
+	
 		mapaActual = new Mapa();
 		entidades = new LinkedList<Entidad>();
 		
 		Fabrica fabricaJugador = new FabricaJugador(mapaActual.getLimiteX(), mapaActual.getLimiteY());
 		Fabrica fabricaInfectado = new FabricaInfectado(mapaActual.getLimiteX(), mapaActual.getLimiteY());
 		
-		jugador = fabricaJugador.crearEntidad();
+		jugador = (Jugador) fabricaJugador.crearEntidad();
 		jugador.setPosX(mapaActual.getLimiteX()/2);
 		jugador.setPosY(mapaActual.getLimiteY());
 		
@@ -76,5 +78,15 @@ public class Juego
 	public JPanel getMapa()
 	{
 		return mapaActual.getPanel();
+	}
+
+	public void moverJugador(String direccion) {
+		jugador.moverse(direccion);
+		
+	}
+
+	public void disparaJugador() {
+		
+		
 	}
 }
