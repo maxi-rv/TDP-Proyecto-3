@@ -1,9 +1,7 @@
 package Humano;
 
-import javax.swing.JLabel;
-
 import Arma.ArmaViralAlpha;
-import Proyectil.Proyectil;
+import ContenedorGrafico.ContenedorGraficoInfectadoAlpha;
 import Visitor.Visitor;
 
 public class InfectadoAlpha extends Infectado
@@ -12,6 +10,7 @@ public class InfectadoAlpha extends Infectado
 	public InfectadoAlpha(ArmaViralAlpha ar)
 	{
 		this.arma = ar;
+		this.contenedorGrafico = new ContenedorGraficoInfectadoAlpha();
 	}
 	
 	//METODOS
@@ -24,20 +23,11 @@ public class InfectadoAlpha extends Infectado
 	public void moverse() 
 	{
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void aceptar(Visitor v) 
 	{
 		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Proyectil disparar() 
-	{
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

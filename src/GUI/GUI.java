@@ -11,7 +11,7 @@ import Juego.Juego;
 
 public class GUI {
 
-	private JFrame frmRobotVsInfectados;
+	private JFrame frameVentana;
 	private JPanel panelMapa;
 	private Juego juego;
 	
@@ -29,7 +29,7 @@ public class GUI {
 				try 
 				{
 					GUI window = new GUI();
-					window.frmRobotVsInfectados.setVisible(true);
+					window.frameVentana.setVisible(true);
 				} 
 				catch (Exception e) 
 				{
@@ -53,15 +53,20 @@ public class GUI {
 	 */
 	private void initialize() 
 	{
-		frmRobotVsInfectados = new JFrame();
-		frmRobotVsInfectados.setTitle("Robot vs Infectados");
-		frmRobotVsInfectados.setResizable(false);
-		frmRobotVsInfectados.setBounds(100, 100, 640, 480);
-		frmRobotVsInfectados.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frameVentana = new JFrame();
+		frameVentana.setTitle("Robot vs Infectados");
+		frameVentana.setResizable(false);
+		frameVentana.setBounds(100, 100, 640, 480);
+		frameVentana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frameVentana.getContentPane().setLayout(null);
+		
+		iniciarJuego();
+		
+		frameVentana.getContentPane().add(panelMapa);
 		
 		KeyListener escucha = new EscuchaTeclado();
 		panelMapa.addKeyListener(escucha);
-		
+		panelMapa.setFocusable(true);
 	}
 	
 	/*
@@ -87,37 +92,41 @@ public class GUI {
 		
 	}
 	
-	private class EscuchaTeclado implements KeyListener{
-		
-		public void keyPressed(KeyEvent e) {
+	//CLASE ANIDADA
+	private class EscuchaTeclado implements KeyListener
+	{
+		public void keyPressed(KeyEvent e) 
+		{
 			actuar(e);
 		}
 
-		public void keyTyped(KeyEvent e) {
+		public void keyTyped(KeyEvent e) 
+		{
 			actuar(e);
-			
 		}
 		
-		private void actuar(KeyEvent e){			
-			
-			if(e.getExtendedKeyCode() == KeyEvent.VK_KP_LEFT){
+		private void actuar(KeyEvent e)
+		{			
+			if(e.getExtendedKeyCode() == KeyEvent.VK_KP_LEFT)
+			{
 				juego.moverJugador("Izquierda");
 			}
 
-			if(e.getExtendedKeyCode() == KeyEvent.VK_KP_RIGHT){
+			if(e.getExtendedKeyCode() == KeyEvent.VK_KP_RIGHT)
+			{
 				juego.moverJugador("Derecha");
 			}
 			
-			if(e.getExtendedKeyCode() == KeyEvent.VK_SPACE){
+			if(e.getExtendedKeyCode() == KeyEvent.VK_SPACE)
+			{
 				juego.disparaJugador();
 			}
 		}
-
-
 		
-		public void keyReleased(KeyEvent e) {}
-		
-		
+		public void keyReleased(KeyEvent e) 
+		{
+			
+		}
 	}
 
 }

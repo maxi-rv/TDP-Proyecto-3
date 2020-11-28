@@ -1,9 +1,7 @@
 package Humano;
 
-import javax.swing.JLabel;
-
 import Arma.ArmaSanitaria;
-import Proyectil.Proyectil;
+import ContenedorGrafico.ContenedorGraficoJugador;
 import Visitor.Visitor;
 
 public class Jugador extends Humano
@@ -12,6 +10,7 @@ public class Jugador extends Humano
 	public Jugador(ArmaSanitaria ar)
 	{
 		this.arma = ar;
+		this.contenedorGrafico = new ContenedorGraficoJugador();
 	}
 	
 	//METODOS
@@ -21,44 +20,43 @@ public class Jugador extends Humano
 	}
 
 
-	public void moverse(String direccion){
+	public void moverse(String direccion)
+	{
 		mover(direccion);
-		
 	}
 
 	public void aceptar(Visitor v) 
 	{
 		
-		
-	}	
-
-	
-	public Proyectil disparar()	{
-		
-		return null;
 	}
 	
-	private void mover(String direccion){	
-		
-		
-		if(direccion == "Izquierda"){
-			if(Math.abs(posY) < Math.abs(limiteY))
-				setPosY(posY-5);
+	private void mover(String direccion)
+	{	
+		if(direccion == "Izquierda")
+		{
+			//if(Math.abs(posX) < Math.abs(limiteX))
+			if(posX > 0)
+				setPosX(posX-5);
 		}
 
-		if(direccion == "Derecha"){
-			if(Math.abs(posY) < Math.abs(limiteY))
-				setPosY(posY+5);
+		if(direccion == "Derecha")
+		{
+			//if(Math.abs(posX) < Math.abs(limiteX))
+			if(posX < limiteX)
+				setPosX(posX+5);
 		}
 		
 		actualizar(posX,posY);
-		
 	}
 	
-	private void actualizar(int posX,int posY){
+	private void actualizar(int posX,int posY)
+	{
 		this.contenedorGrafico.actualizar(posX,posY);
 	}
 	
-	public void moverse() {}
+	public void moverse()
+	{
+		
+	}
 
 }

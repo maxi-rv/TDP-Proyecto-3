@@ -14,7 +14,11 @@ public class Mapa
 	//CONSTRUCTOR
 	public Mapa()
 	{
-		
+		panelMapa = new JPanel();
+		panelMapa.setLayout(null);
+		panelMapa.setBounds(0, 0, 640, 480);
+		limiteX = 640;
+		limiteY = 480;
 	}
 	
 	//METODOS
@@ -23,7 +27,12 @@ public class Mapa
 		
 	}
 	
-	public void moverEntidad(Entidad entidad)
+	public void insertarEntidad(Entidad entidad)
+	{
+		panelMapa.add(entidad.getContenedorGrafico().getLabel());
+	}
+	
+	public void actualizarEntidad(Entidad entidad)
 	{
 		
 	}
@@ -47,6 +56,8 @@ public class Mapa
 	{
 		return limiteY;
 	}
+
+	
 	
 	
 }

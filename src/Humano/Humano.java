@@ -11,5 +11,8 @@ public abstract class Humano extends Entidad
 	protected Arma arma;
 	
 	//METODOS
-	public abstract Proyectil disparar();
+	public Proyectil disparar()	
+	{
+		return arma.disparar(this.posX, this.posY);
+	}
 }

@@ -1,7 +1,5 @@
 package Juego;
 
-import javax.swing.JLabel;
-
 import ContenedorGrafico.ContenedorGrafico;
 import Visitor.Visitor;
 
@@ -20,9 +18,9 @@ public abstract class Entidad
 	
 	public abstract void moverse();
 	
-	public JLabel getContenedorGrafico()
+	public ContenedorGrafico getContenedorGrafico()
 	{
-		return contenedorGrafico.getLabel();
+		return contenedorGrafico;
 	}
 
 	public int getPosX() 

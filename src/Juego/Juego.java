@@ -34,13 +34,40 @@ public class Juego
 		Fabrica fabricaInfectado = new FabricaInfectado(mapaActual.getLimiteX(), mapaActual.getLimiteY());
 		
 		jugador = (Jugador) fabricaJugador.crearEntidad();
-		jugador.setPosX(mapaActual.getLimiteX()/2);
-		jugador.setPosY(mapaActual.getLimiteY());
+		jugador.setPosX(5);
+		jugador.setPosY(5);
+		mapaActual.insertarEntidad(jugador);
 		
 		nivelActual = new Nivel();
 		cargarNivel(fabricaInfectado);
+	}	
+
+	//METODOS
+	public static Juego obtenerInstancia()
+	{
+		if (instancia == null)
+		{
+			instancia = new Juego();
+		}
+		
+		return instancia;
+	}
+	
+	public JPanel getMapa()
+	{
+		return mapaActual.getPanel();
 	}
 
+	public void moverJugador(String direccion) 
+	{
+		jugador.moverse(direccion);
+	}
+
+	public void disparaJugador() 
+	{
+		
+	}
+	
 	private void cargarNivel(Fabrica fabricaInfectado)
 	{
 		while(nivelActual.quedanTandas())
@@ -62,31 +89,5 @@ public class Juego
 			
 			mapaActual.cargarEntidades(entidades);
 		}
-	}
-
-	//METODOS
-	public static Juego obtenerInstancia()
-	{
-		if (instancia == null)
-		{
-			instancia = new Juego();
-		}
-		
-		return instancia;
-	}
-	
-	public JPanel getMapa()
-	{
-		return mapaActual.getPanel();
-	}
-
-	public void moverJugador(String direccion) {
-		jugador.moverse(direccion);
-		
-	}
-
-	public void disparaJugador() {
-		
-		
 	}
 }

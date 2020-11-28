@@ -2,19 +2,19 @@ package ContenedorGrafico;
 
 import javax.swing.JLabel;
 
-public abstract class ContenedorGrafico{
+public abstract class ContenedorGrafico
+{
+	//ATRIBUTOS
+	protected JLabel imagen;
 	
-	private JLabel imagen;
-	
-	
-	public JLabel getLabel(){
+	//METODOS
+	public JLabel getLabel()
+	{
 		return imagen;
 	}
 	
-	public void actualizar(int posX, int posY){
-		imagen.setLocation(posX, posY);
-		
-	}
-	
-	
+	public void actualizar(int posX, int posY)
+	{
+		imagen.setBounds(posX, posY, 64, 64);
+	}	
 }
