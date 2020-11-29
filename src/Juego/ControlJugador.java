@@ -27,23 +27,22 @@ public class ControlJugador implements KeyListener
 	}
 	
 	private void move(KeyEvent e){
-		int posX,posY, limitX,limitY;
 		
-		posX = jugador.getPosX();
-		posY = jugador.getPosY();
+		int limitX, posX;
+		
+		posX = jugador.getPosX();	
 		
 		limitX = jugador.getLimiteX();
-		limitY = jugador.getLimiteY();
-		
+	
 		
 		if(e.getExtendedKeyCode() == KeyEvent.VK_KP_LEFT){
-			if(Math.abs(posX) < Math.abs(limitX))
+			if(posX > 0)
 				jugador.setPosX(posX-5);
 		}
 
 		if(e.getExtendedKeyCode() == KeyEvent.VK_KP_RIGHT){
-			if(Math.abs(posY) < Math.abs(limitY))
-				jugador.setPosY(posY-5);
+			if(posX < limitX)
+				jugador.setPosX(posX+5);
 		}
 	}
 

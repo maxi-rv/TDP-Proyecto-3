@@ -15,6 +15,6 @@ public abstract class ContenedorGrafico
 	
 	public void actualizar(int posX, int posY)
 	{
-		imagen.setBounds(posX, posY, 64, 64);
+		imagen.setLocation(posX, posY);
 	}	
 }

@@ -31,6 +31,13 @@ public abstract class Entidad
 	public void setPosX(int posX) 
 	{
 		this.posX = posX;
+		if(posX<0)
+			posX = 0;
+		else if(posX> limiteX){
+				System.out.println("El limite de X en entidad es "+ limiteX);
+				posX = limiteX;
+				
+		}
 	}
 
 	public int getPosY() 
@@ -41,6 +48,11 @@ public abstract class Entidad
 	public void setPosY(int posY) 
 	{
 		this.posY = posY;
+		
+		if(posY<0)
+			posY = 0;
+		else if(posY> limiteY)
+				posY = limiteY;
 	}
 
 	public int getLimiteX() 

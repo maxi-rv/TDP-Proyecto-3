@@ -1,5 +1,6 @@
 package Juego;
 
+import java.awt.Color;
 import java.util.LinkedList;
 
 import javax.swing.JPanel;
@@ -17,6 +18,7 @@ public class Mapa
 		panelMapa = new JPanel();
 		panelMapa.setLayout(null);
 		panelMapa.setBounds(0, 0, 640, 480);
+		panelMapa.setBackground(Color.BLUE);
 		limiteX = 640;
 		limiteY = 480;
 	}
@@ -29,6 +31,8 @@ public class Mapa
 	
 	public void insertarEntidad(Entidad entidad)
 	{
+		entidad.setLimiteX(limiteX);
+		entidad.setLimiteY(limiteY);
 		panelMapa.add(entidad.getContenedorGrafico().getLabel());
 	}
 	

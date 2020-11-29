@@ -1,5 +1,6 @@
 package GUI;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -58,15 +59,22 @@ public class GUI {
 		frameVentana.setResizable(false);
 		frameVentana.setBounds(100, 100, 640, 480);
 		frameVentana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frameVentana.getContentPane().setLayout(null);
+		frameVentana.setLocationRelativeTo(null);
+	//	frameVentana.getContentPane().setLayout(null);
+		
 		
 		iniciarJuego();
 		
 		frameVentana.getContentPane().add(panelMapa);
 		
 		KeyListener escucha = new EscuchaTeclado();
+		
+	   // frameVentana.getContentPane().setFocusable(true);
+       // frameVentana.getContentPane().addKeyListener(escucha);
 		panelMapa.addKeyListener(escucha);
 		panelMapa.setFocusable(true);
+		
+		
 	}
 	
 	/*
@@ -75,7 +83,8 @@ public class GUI {
 	private void iniciarJuego() 
 	{
 		juego = Juego.obtenerInstancia();
-		panelMapa = juego.getMapa();
+		panelMapa = juego.getMapa().getPanel();
+		System.out.println("Limite "+ juego.getMapa().getLimiteX());
 		
 		//QUE MAS???
 	}
@@ -95,25 +104,30 @@ public class GUI {
 	//CLASE ANIDADA
 	private class EscuchaTeclado implements KeyListener
 	{
+		
 		public void keyPressed(KeyEvent e) 
 		{
 			actuar(e);
+			
 		}
 
 		public void keyTyped(KeyEvent e) 
 		{
 			actuar(e);
+			
 		}
 		
 		private void actuar(KeyEvent e)
-		{			
-			if(e.getExtendedKeyCode() == KeyEvent.VK_KP_LEFT)
+		{  
+			
+			if(e.getExtendedKeyCode() == KeyEvent.VK_LEFT)
 			{
 				juego.moverJugador("Izquierda");
 			}
 
-			if(e.getExtendedKeyCode() == KeyEvent.VK_KP_RIGHT)
+			if(e.getExtendedKeyCode() == KeyEvent.VK_RIGHT)
 			{
+				
 				juego.moverJugador("Derecha");
 			}
 			

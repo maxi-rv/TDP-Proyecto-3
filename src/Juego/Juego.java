@@ -30,12 +30,14 @@ public class Juego
 		mapaActual = new Mapa();
 		entidades = new LinkedList<Entidad>();
 		
+		
+		
 		Fabrica fabricaJugador = new FabricaJugador(mapaActual.getLimiteX(), mapaActual.getLimiteY());
 		Fabrica fabricaInfectado = new FabricaInfectado(mapaActual.getLimiteX(), mapaActual.getLimiteY());
 		
 		jugador = (Jugador) fabricaJugador.crearEntidad();
-		jugador.setPosX(5);
-		jugador.setPosY(5);
+		jugador.setPosX(220);
+		jugador.setPosY(240);
 		mapaActual.insertarEntidad(jugador);
 		
 		nivelActual = new Nivel();
@@ -53,13 +55,14 @@ public class Juego
 		return instancia;
 	}
 	
-	public JPanel getMapa()
+	public Mapa getMapa()
 	{
-		return mapaActual.getPanel();
+		return mapaActual;
 	}
 
 	public void moverJugador(String direccion) 
 	{
+		System.out.println("Limitee "+ jugador.getLimiteX());
 		jugador.moverse(direccion);
 	}
 
