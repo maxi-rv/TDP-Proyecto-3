@@ -1,27 +1,27 @@
 package Juego;
 
-import java.awt.Color;
 import java.util.LinkedList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import GUI.panelConImagen;
 
 public class Mapa
 {
 	//ATRIBUTOS
 	protected int limiteX;
 	protected int limiteY;
-	protected JPanel panelMapa;
+	protected panelConImagen panelMapa;
 	
 	//CONSTRUCTOR
-	public Mapa()
+	public Mapa(int limX, int limY)
 	{
-		panelMapa = new JPanel();
+		panelMapa = new panelConImagen(new ImageIcon("src/Sprites/Map.png").getImage());
 		panelMapa.setLayout(null);
-		panelMapa.setBounds(0, 0, 640, 480);
-		panelMapa.setBackground(Color.GRAY);
+		panelMapa.setBounds(0, 0, limX, limY);
 		
-		limiteX = 640;
-		limiteY = 480;
+		limiteX = limX;
+		limiteY = limY;
 	}
 	
 	//METODOS

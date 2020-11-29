@@ -3,8 +3,6 @@ package Juego;
 import java.util.LinkedList;
 import java.util.Random;
 
-import javax.swing.JPanel;
-
 import Fabrica.Fabrica;
 import Fabrica.FabricaInfectado;
 import Fabrica.FabricaJugador;
@@ -25,19 +23,17 @@ public class Juego
 	protected Jugador jugador;
 	
 	//CONSTRUCTOR
-	protected Juego(){
+	protected Juego(int limX, int limY){
 	
-		mapaActual = new Mapa();
+		mapaActual = new Mapa(limX, limY);
 		entidades = new LinkedList<Entidad>();
-		
-		
 		
 		Fabrica fabricaJugador = new FabricaJugador(mapaActual.getLimiteX(), mapaActual.getLimiteY());
 		Fabrica fabricaInfectado = new FabricaInfectado(mapaActual.getLimiteX(), mapaActual.getLimiteY());
 		
 		jugador = (Jugador) fabricaJugador.crearEntidad();
-		jugador.setPosX(220);
-		jugador.setPosY(240);
+		jugador.setPosX(mapaActual.getLimiteX()/2);
+		jugador.setPosY(mapaActual.getLimiteY());
 		mapaActual.insertarEntidad(jugador);
 		
 		nivelActual = new Nivel();
@@ -45,11 +41,11 @@ public class Juego
 	}	
 
 	//METODOS
-	public static Juego obtenerInstancia()
+	public static Juego obtenerInstancia(int limX, int limY)
 	{
 		if (instancia == null)
 		{
-			instancia = new Juego();
+			instancia = new Juego(limX, limY);
 		}
 		
 		return instancia;

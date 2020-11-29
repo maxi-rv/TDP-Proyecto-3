@@ -42,8 +42,6 @@ public abstract class Entidad
 		{
 			this.posX = x;
 		}
-		
-		System.out.println("PosX Jugador:"+this.posX);
 	}
 
 	public int getPosY() 
@@ -51,14 +49,20 @@ public abstract class Entidad
 		return posY;
 	}
 
-	public void setPosY(int posY) 
+	public void setPosY(int y) 
 	{
-		this.posY = posY;
-		
-		if(posY<0)
-			posY = 0;
-		else if(posY> limiteY)
-				posY = limiteY;
+		if(y<0)
+		{
+			this.posY = 0;
+		}
+		else if(y>limiteY-1)
+		{
+			this.posY = limiteY;	
+		}
+		else
+		{
+			this.posY = y;
+		}
 	}
 
 	public int getLimiteX() 
@@ -71,7 +75,8 @@ public abstract class Entidad
 		this.limiteX = limiteX;
 	}
 
-	public int getLimiteY() {
+	public int getLimiteY() 
+	{
 		return limiteY;
 	}
 

@@ -1,6 +1,5 @@
 package GUI;
 
-import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -12,11 +11,11 @@ import Juego.Juego;
 
 public class GUI {
 
-	private JFrame frameVentana;
-	private JPanel panelMapa;
-	private Juego juego;
-	
-	//HOLA!
+	protected JFrame frameVentana;
+	protected JPanel panelMapa;
+	protected Juego juego;
+	protected int limiteX;
+	protected int limiteY;
 	
 	/**
 	 * Launch the application.
@@ -54,10 +53,13 @@ public class GUI {
 	 */
 	private void initialize() 
 	{
+		limiteX = 600;
+		limiteY = 600;
+		
 		frameVentana = new JFrame();
 		frameVentana.setTitle("Robot vs Infectados");
 		frameVentana.setResizable(false);
-		frameVentana.setBounds(100, 100, 800, 600);
+		frameVentana.setBounds(0, 0, limiteX, limiteY);
 		frameVentana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frameVentana.setLocationRelativeTo(null);
 		//frameVentana.getContentPane().setLayout(null);
@@ -65,6 +67,7 @@ public class GUI {
 		iniciarJuego();
 		
 		frameVentana.getContentPane().add(panelMapa);
+		panelMapa.setLocation(0, 0);
 		
 		KeyListener escucha = new EscuchaTeclado();
 		
@@ -81,7 +84,7 @@ public class GUI {
 	 */
 	private void iniciarJuego() 
 	{
-		juego = Juego.obtenerInstancia();
+		juego = Juego.obtenerInstancia(limiteX-150, limiteY-247);
 		panelMapa = juego.getMapa().getPanel();
 		System.out.println("Limite Mapa:"+ juego.getMapa().getLimiteX());
 		
