@@ -18,7 +18,8 @@ public class Mapa
 		panelMapa = new JPanel();
 		panelMapa.setLayout(null);
 		panelMapa.setBounds(0, 0, 640, 480);
-		panelMapa.setBackground(Color.BLUE);
+		panelMapa.setBackground(Color.GRAY);
+		
 		limiteX = 640;
 		limiteY = 480;
 	}

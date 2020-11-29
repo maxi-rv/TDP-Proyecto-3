@@ -62,7 +62,6 @@ public class Juego
 
 	public void moverJugador(String direccion) 
 	{
-		System.out.println("Limitee "+ jugador.getLimiteX());
 		jugador.moverse(direccion);
 	}
 

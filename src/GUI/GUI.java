@@ -57,11 +57,10 @@ public class GUI {
 		frameVentana = new JFrame();
 		frameVentana.setTitle("Robot vs Infectados");
 		frameVentana.setResizable(false);
-		frameVentana.setBounds(100, 100, 640, 480);
+		frameVentana.setBounds(100, 100, 800, 600);
 		frameVentana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frameVentana.setLocationRelativeTo(null);
-	//	frameVentana.getContentPane().setLayout(null);
-		
+		//frameVentana.getContentPane().setLayout(null);
 		
 		iniciarJuego();
 		
@@ -69,8 +68,8 @@ public class GUI {
 		
 		KeyListener escucha = new EscuchaTeclado();
 		
-	   // frameVentana.getContentPane().setFocusable(true);
-       // frameVentana.getContentPane().addKeyListener(escucha);
+		//frameVentana.getContentPane().setFocusable(true);
+		//frameVentana.getContentPane().addKeyListener(escucha);
 		panelMapa.addKeyListener(escucha);
 		panelMapa.setFocusable(true);
 		
@@ -84,7 +83,7 @@ public class GUI {
 	{
 		juego = Juego.obtenerInstancia();
 		panelMapa = juego.getMapa().getPanel();
-		System.out.println("Limite "+ juego.getMapa().getLimiteX());
+		System.out.println("Limite Mapa:"+ juego.getMapa().getLimiteX());
 		
 		//QUE MAS???
 	}

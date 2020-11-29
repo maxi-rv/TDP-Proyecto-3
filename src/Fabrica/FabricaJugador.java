@@ -20,6 +20,9 @@ public class FabricaJugador extends Fabrica
 		ArmaSanitaria arma = new ArmaSanitaria(proyectil);
 		Jugador jugador = new Jugador(arma);
 		
+		jugador.setLimiteX(limiteX);
+		jugador.setLimiteY(limiteY);
+		
 		return jugador;
 	}
 }

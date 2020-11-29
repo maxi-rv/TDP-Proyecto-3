@@ -28,16 +28,22 @@ public abstract class Entidad
 		return posX;
 	}
 
-	public void setPosX(int posX) 
+	public void setPosX(int x) 
 	{
-		this.posX = posX;
-		if(posX<0)
-			posX = 0;
-		else if(posX> limiteX){
-				System.out.println("El limite de X en entidad es "+ limiteX);
-				posX = limiteX;
-				
+		if(x<0)
+		{
+			this.posX = 0;
 		}
+		else if(x>limiteX-1)
+		{
+			this.posX = limiteX;	
+		}
+		else
+		{
+			this.posX = x;
+		}
+		
+		System.out.println("PosX Jugador:"+this.posX);
 	}
 
 	public int getPosY() 
