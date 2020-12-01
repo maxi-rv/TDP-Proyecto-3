@@ -11,6 +11,7 @@ public class Jugador extends Humano
 	{
 		this.arma = ar;
 		this.contenedorGrafico = new ContenedorGraficoJugador();
+		this.velocidad = 10;
 	}
 	
 	//METODOS
@@ -19,41 +20,23 @@ public class Jugador extends Humano
 		this.cargaViral = this.cargaViral + damage;
 	}
 
-
-	public void moverse(String direccion)
-	{
-		
-		//System.out.println("hola");
-		mover(direccion);
-	}
-
 	public void aceptar(Visitor v) 
 	{
 		
 	}
 	
-	private void mover(String direccion)
-	{	
-		if(direccion.equals("Izquierda"))	
-		{
-			//if(Math.abs(posX) < Math.abs(limiteX))
-			setPosX(posX-10);
-		}
-
-		if(direccion.equals("Derecha"))				
-			setPosX(posX+10);
-				
+	public void moverse()
+	{
 		actualizar(posX,posY);
 	}
 	
-	private void actualizar(int posX,int posY)
+	/*
+	 * Este metodo no deberia estar.
+	 * Se deberia utilizar el metodo ActualizarEntidad() de Mapa.
+	 */
+	protected void actualizar(int posX,int posY)
 	{
 		this.contenedorGrafico.actualizar(posX,posY);
-	}
-	
-	public void moverse()
-	{
-		
 	}
 
 }

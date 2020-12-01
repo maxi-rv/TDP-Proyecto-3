@@ -32,6 +32,9 @@ public class FabricaInfectado extends Fabrica
 		else
 			infectado = crearInfectadoBeta();
 		
+		infectado.setLimiteX(limiteX);
+		infectado.setLimiteY(limiteY);
+		
 		return infectado;
 	}
 	

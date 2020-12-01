@@ -11,18 +11,13 @@ public class InfectadoAlpha extends Infectado
 	{
 		this.arma = ar;
 		this.contenedorGrafico = new ContenedorGraficoInfectadoAlpha();
+		this.velocidad = 5;
 	}
 	
 	//METODOS
 	public void duplicarVelocidad()
 	{
 		velocidad=2*velocidad;
-	}
-
-	@Override
-	public void moverse() 
-	{
-		// TODO Auto-generated method stub
 	}
 
 	@Override

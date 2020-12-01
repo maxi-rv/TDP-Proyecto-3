@@ -20,24 +20,29 @@ public class Juego
 	protected Nivel nivelActual;
 	protected Mapa mapaActual;
 	protected LinkedList<Entidad> entidades;
+	protected LinkedList<Entidad> entidadesAgregar;
+	protected LinkedList<Entidad> entidadesEliminar;
 	protected Jugador jugador;
+	protected Fabrica fabricaJugador;
+	protected Fabrica fabricaInfectado;
 	
 	//CONSTRUCTOR
-	protected Juego(int limX, int limY){
-	
+	protected Juego(int limX, int limY)
+	{
 		mapaActual = new Mapa(limX, limY);
 		entidades = new LinkedList<Entidad>();
 		
-		Fabrica fabricaJugador = new FabricaJugador(mapaActual.getLimiteX(), mapaActual.getLimiteY());
-		Fabrica fabricaInfectado = new FabricaInfectado(mapaActual.getLimiteX(), mapaActual.getLimiteY());
+		fabricaJugador = new FabricaJugador(mapaActual.getLimiteX(), mapaActual.getLimiteY());
+		fabricaInfectado = new FabricaInfectado(mapaActual.getLimiteX(), mapaActual.getLimiteY());
 		
 		jugador = (Jugador) fabricaJugador.crearEntidad();
+		mapaActual.insertarEntidad(jugador);
 		jugador.setPosX(mapaActual.getLimiteX()/2);
 		jugador.setPosY(mapaActual.getLimiteY());
-		mapaActual.insertarEntidad(jugador);
 		
 		nivelActual = new Nivel();
-		cargarNivel(fabricaInfectado);
+		
+		ejecutarJuego();
 	}	
 
 	//METODOS
@@ -58,7 +63,18 @@ public class Juego
 
 	public void moverJugador(String direccion) 
 	{
-		jugador.moverse(direccion);
+		if(direccion.equals("Izquierda"))	
+		{
+			jugador.setPosX(jugador.getPosX()-jugador.getVelocidad());
+		}
+
+		if(direccion.equals("Derecha"))	
+		{
+			jugador.setPosX(jugador.getPosX()+jugador.getVelocidad());
+		}
+				
+		jugador.moverse(); //Esto no deberia hacerse.
+		//this.mapaActual.actualizarEntidad(jugador);
 	}
 
 	public void disparaJugador() 
@@ -66,26 +82,46 @@ public class Juego
 		
 	}
 	
-	private void cargarNivel(Fabrica fabricaInfectado)
+	protected void ejecutarJuego() 
 	{
+		this.nivelActual.NuevoNivel();
+		
 		while(nivelActual.quedanTandas())
 		{
-			int cantInfectados = nivelActual.getTandaActual();
+			cargarTanda();
+			jugarTanda();
+		}
+	}
+	
+	protected void cargarTanda()
+	{
+		int cantInfectados = nivelActual.getTandaActual();
 			
-			Random randomNumGen = new Random();
+		Random randomNumGen = new Random();
+		
+		for(int i=0; i<cantInfectados; i++)
+		{
+			Entidad infectado = fabricaInfectado.crearEntidad();
 			
-			for(int i=0; i<cantInfectados; i++)
+			infectado.setPosX(randomNumGen.nextInt(mapaActual.getLimiteX()-50));
+			infectado.setPosY(0);
+			
+			entidades.addLast(infectado);
+			
+			mapaActual.insertarEntidad(infectado);
+		}
+		
+		//mapaActual.cargarEntidades(entidades);
+	}
+
+	protected void jugarTanda() 
+	{
+		while(!entidades.isEmpty())
+		{
+			for(Entidad entidad : entidades)
 			{
-				Entidad infectado = fabricaInfectado.crearEntidad();
-				
-				infectado.setLimiteX(randomNumGen.nextInt(mapaActual.getLimiteX())); //SETEA UNA POSICION RANDOM
-				infectado.setLimiteY(5);
-				
-				entidades.addLast(infectado);
-				
+				entidad.moverse();
 			}
-			
-			mapaActual.cargarEntidades(entidades);
 		}
 	}
 }

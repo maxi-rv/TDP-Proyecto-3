@@ -7,4 +7,9 @@ public abstract class Infectado extends Humano
 	{
 		this.cargaViral = this.cargaViral - damage;
 	}
+	
+	public void moverse()
+	{
+		setPosY(posY+this.velocidad);
+	}
 }

@@ -11,11 +11,7 @@ public class InfectadoBeta extends Infectado
 	{
 		this.arma = ar;
 		this.contenedorGrafico = new ContenedorGraficoInfectadoBeta();
-	}
-
-	public void moverse() 
-	{
-		// TODO Auto-generated method stub
+		this.velocidad = 5;
 	}	
 
 	public void aceptar(Visitor v) 

@@ -30,11 +30,11 @@ public abstract class Entidad
 
 	public void setPosX(int x) 
 	{
-		if(x<0)
+		if(x <= 0)
 		{
 			this.posX = 0;
 		}
-		else if(x>limiteX-1)
+		else if(x >= limiteX)
 		{
 			this.posX = limiteX;	
 		}
@@ -55,7 +55,7 @@ public abstract class Entidad
 		{
 			this.posY = 0;
 		}
-		else if(y>limiteY-1)
+		else if(y >= limiteY)
 		{
 			this.posY = limiteY;	
 		}

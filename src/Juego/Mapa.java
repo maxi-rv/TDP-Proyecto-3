@@ -1,8 +1,12 @@
 package Juego;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.LinkedList;
 
-import javax.swing.ImageIcon;
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import GUI.panelConImagen;
 
@@ -16,9 +20,22 @@ public class Mapa
 	//CONSTRUCTOR
 	public Mapa(int limX, int limY)
 	{
-		panelMapa = new panelConImagen(new ImageIcon("src/Sprites/Map.png").getImage());
-		panelMapa.setLayout(null);
-		panelMapa.setBounds(0, 0, limX, limY);
+		//Creamos la imagen como una BufferedImage
+		BufferedImage imagenOriginal = null;
+		try 
+		{
+			imagenOriginal = ImageIO.read(new File("src/Sprites/Map.png"));
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+		
+		//Redimensionamos la BufferedImage
+		Image imagenRedimensionada = imagenOriginal.getScaledInstance(limX+64, limY+128, Image.SCALE_SMOOTH);
+		
+		//Creamos el Panel y asignamos la ImageIcon
+		panelMapa = new panelConImagen(imagenRedimensionada);
 		
 		limiteX = limX;
 		limiteY = limY;
@@ -32,8 +49,6 @@ public class Mapa
 	
 	public void insertarEntidad(Entidad entidad)
 	{
-		entidad.setLimiteX(limiteX);
-		entidad.setLimiteY(limiteY);
 		panelMapa.add(entidad.getContenedorGrafico().getLabel());
 	}
 	

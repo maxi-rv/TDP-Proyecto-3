@@ -10,7 +10,7 @@ public class Nivel
 	//CONSTRUCTOR
 	public Nivel()
 	{
-		numeroNivel=1;
+		numeroNivel=0;
 		tandaActual=0;
 		tandas= new int[2];
 		
