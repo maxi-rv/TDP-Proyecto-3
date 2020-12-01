@@ -16,7 +16,7 @@ public class InfectadoAlpha extends Infectado
 	//METODOS
 	public void duplicarVelocidad()
 	{
-		
+		velocidad=2*velocidad;
 	}
 
 	@Override
