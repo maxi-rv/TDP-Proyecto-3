@@ -39,10 +39,11 @@ public class Juego
 		mapaActual.insertarEntidad(jugador);
 		jugador.setPosX(mapaActual.getLimiteX()/2);
 		jugador.setPosY(mapaActual.getLimiteY());
+		jugador.getContenedorGrafico().actualizar(jugador.getPosX(),jugador.getPosY());
 		
 		nivelActual = new Nivel();
 		
-		ejecutarJuego();
+		ejecutarJuego(); //Esto deberia ejectuarse en un hilo.
 	}	
 
 	//METODOS
@@ -74,7 +75,6 @@ public class Juego
 		}
 				
 		jugador.moverse(); //Esto no deberia hacerse.
-		//this.mapaActual.actualizarEntidad(jugador);
 	}
 
 	public void disparaJugador() 
@@ -82,7 +82,10 @@ public class Juego
 		
 	}
 	
-	protected void ejecutarJuego() 
+	/*
+	 * Esto deberia ejectuarse en un hilo.
+	 */
+	public void ejecutarJuego() 
 	{
 		this.nivelActual.NuevoNivel();
 		
@@ -95,7 +98,8 @@ public class Juego
 	
 	protected void cargarTanda()
 	{
-		int cantInfectados = nivelActual.getTandaActual();
+		//int cantInfectados = nivelActual.getTandaActual();
+		int cantInfectados = 5; //Forzamos a que cree 5 infectados sin importar el nivel
 			
 		Random randomNumGen = new Random();
 		
@@ -103,25 +107,21 @@ public class Juego
 		{
 			Entidad infectado = fabricaInfectado.crearEntidad();
 			
-			infectado.setPosX(randomNumGen.nextInt(mapaActual.getLimiteX()-50));
-			infectado.setPosY(0);
-			
-			entidades.addLast(infectado);
+			infectado.setPosX(randomNumGen.nextInt(mapaActual.getLimiteX()));
+			infectado.setPosY(5);
 			
 			mapaActual.insertarEntidad(infectado);
+			infectado.getContenedorGrafico().actualizar(infectado.getPosX(), infectado.getPosY());
+			
+			entidades.addLast(infectado);
 		}
-		
-		//mapaActual.cargarEntidades(entidades);
 	}
 
 	protected void jugarTanda() 
 	{
-		while(!entidades.isEmpty())
+		for(Entidad entidad : entidades)
 		{
-			for(Entidad entidad : entidades)
-			{
-				entidad.moverse();
-			}
+			entidad.moverse();
 		}
 	}
 }

@@ -4,7 +4,6 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -42,11 +41,6 @@ public class Mapa
 	}
 	
 	//METODOS
-	public void cargarEntidades(LinkedList<Entidad> entidades)
-	{
-		
-	}
-	
 	public void insertarEntidad(Entidad entidad)
 	{
 		panelMapa.add(entidad.getContenedorGrafico().getLabel());

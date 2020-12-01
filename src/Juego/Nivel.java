@@ -10,10 +10,9 @@ public class Nivel
 	//CONSTRUCTOR
 	public Nivel()
 	{
-		numeroNivel=0;
-		tandaActual=0;
-		tandas= new int[2];
-		
+		numeroNivel = 0;
+		tandaActual = 0;
+		tandas = new int[2];
 	}
 	
 	//METODOS
@@ -21,17 +20,21 @@ public class Nivel
 	{
 		int cantInfectados;
 		int cantInfectadosPorTanda;
-		int auxResto=0;
+		int auxResto = 0;
 		
-		numeroNivel ++;
-		tandaActual=0;
-		cantInfectados= 5*numeroNivel;
-		auxResto=cantInfectados% tandas.length;
-		cantInfectadosPorTanda= cantInfectados/ tandas.length;
-		for (int i=0;i < tandas.length;i++) {
-			tandas[i]=cantInfectadosPorTanda;
+		numeroNivel++;
+		tandaActual = 0;
+		
+		cantInfectados = 5 * numeroNivel;
+		auxResto = cantInfectados % tandas.length;
+		cantInfectadosPorTanda = cantInfectados/ tandas.length;
+		
+		for (int i=0; i < tandas.length; i++) 
+		{
+			tandas[i] = cantInfectadosPorTanda;
 		}
-		tandas[tandas.length - 1]= tandas[tandas.length -1]+ auxResto;
+		
+		tandas[tandas.length - 1] = tandas[tandas.length -1] + auxResto;
 	}
 	
 	public int getNumeroNivel() 
@@ -46,12 +49,16 @@ public class Nivel
 
 	public int getTandaActual() 
 	{
-		return tandaActual;
+		int toReturn = tandas[tandaActual];
+		
+		tandaActual++;
+		
+		return toReturn;
 	}
 
 	public boolean quedanTandas()
 	{
-		return (tandaActual== tandas.length - 1);
+		return (tandaActual == tandas.length - 1);
 	}
 	
 }

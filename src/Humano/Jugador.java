@@ -27,15 +27,6 @@ public class Jugador extends Humano
 	
 	public void moverse()
 	{
-		actualizar(posX,posY);
-	}
-	
-	/*
-	 * Este metodo no deberia estar.
-	 * Se deberia utilizar el metodo ActualizarEntidad() de Mapa.
-	 */
-	protected void actualizar(int posX,int posY)
-	{
 		this.contenedorGrafico.actualizar(posX,posY);
 	}
 

@@ -64,15 +64,13 @@ public class GUI {
 		
 		iniciarJuego();
 		
-		frameVentana.getContentPane().add(panelMapa);
-		frameVentana.pack();
+		setearControlJugador();
 		
-		KeyListener escucha = new EscuchaTeclado();
-		
-		panelMapa.addKeyListener(escucha);
-		panelMapa.setFocusable(true);
+		juego.ejecutarJuego();
 	}
 	
+	
+
 	/*
 	 * 
 	 */
@@ -81,6 +79,15 @@ public class GUI {
 		juego = Juego.obtenerInstancia(limiteX, limiteY);
 		panelMapa = juego.getMapa().getPanel();
 		panelMapa.setLocation(0, 0);
+		frameVentana.getContentPane().add(panelMapa);
+		frameVentana.pack();
+	}
+	
+	private void setearControlJugador() 
+	{
+		KeyListener escucha = new EscuchaTeclado();
+		panelMapa.addKeyListener(escucha);
+		panelMapa.setFocusable(true);
 	}
 	
 	//CLASE ANIDADA
