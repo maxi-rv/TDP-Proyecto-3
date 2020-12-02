@@ -14,7 +14,7 @@ public class ContenedorGraficoInfectadoBeta extends ContenedorGrafico
 	public ContenedorGraficoInfectadoBeta()
 	{
 		this.imagen = new JLabel();
-		imagen.setSize(51, 82);
+		imagen.setSize(44, 57);
 
 		//Creamos la imagen como una BufferedImage
 		BufferedImage imagenOriginal = null;

@@ -3,7 +3,6 @@ package Humano;
 import Arma.Arma;
 import Juego.Entidad;
 import Proyectil.Proyectil;
-import Visitor.Visitor;
 
 public abstract class Humano extends Entidad
 {

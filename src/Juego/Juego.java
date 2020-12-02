@@ -31,6 +31,8 @@ public class Juego
 	{
 		mapaActual = new Mapa(limX, limY);
 		entidades = new LinkedList<Entidad>();
+		entidadesAgregar = new LinkedList<Entidad>();
+		entidadesEliminar = new LinkedList<Entidad>();
 		
 		fabricaJugador = new FabricaJugador(mapaActual.getLimiteX(), mapaActual.getLimiteY());
 		fabricaInfectado = new FabricaInfectado(mapaActual.getLimiteX(), mapaActual.getLimiteY());
@@ -42,8 +44,6 @@ public class Juego
 		jugador.getContenedorGrafico().actualizar(jugador.getPosX(),jugador.getPosY());
 		
 		nivelActual = new Nivel();
-		
-		ejecutarJuego(); //Esto deberia ejectuarse en un hilo.
 	}	
 
 	//METODOS
@@ -79,7 +79,8 @@ public class Juego
 
 	public void disparaJugador() 
 	{
-		
+		Entidad proyectil = jugador.disparar();
+		entidadesAgregar.addLast(proyectil);
 	}
 	
 	/*
@@ -88,6 +89,7 @@ public class Juego
 	public void ejecutarJuego() 
 	{
 		this.nivelActual.NuevoNivel();
+		System.out.println("Nivel:"+nivelActual.getNumeroNivel());
 		
 		while(nivelActual.quedanTandas())
 		{
@@ -98,30 +100,56 @@ public class Juego
 	
 	protected void cargarTanda()
 	{
-		//int cantInfectados = nivelActual.getTandaActual();
-		int cantInfectados = 5; //Forzamos a que cree 5 infectados sin importar el nivel
+		int cantInfectados = nivelActual.getInfectadosEnTandaACtual();
 			
 		Random randomNumGen = new Random();
 		
+		System.out.println("Cant Infectados:"+cantInfectados);
 		for(int i=0; i<cantInfectados; i++)
 		{
 			Entidad infectado = fabricaInfectado.crearEntidad();
 			
 			infectado.setPosX(randomNumGen.nextInt(mapaActual.getLimiteX()));
-			infectado.setPosY(5);
+			infectado.setPosY(0);
 			
 			mapaActual.insertarEntidad(infectado);
 			infectado.getContenedorGrafico().actualizar(infectado.getPosX(), infectado.getPosY());
 			
 			entidades.addLast(infectado);
+			
+			System.out.println(i);
 		}
 	}
 
 	protected void jugarTanda() 
 	{
-		for(Entidad entidad : entidades)
+		while(!entidades.isEmpty())
 		{
-			entidad.moverse();
+			try 
+			{
+				Thread.sleep(200);
+			} 
+			catch (InterruptedException e) 
+			{
+				e.printStackTrace();
+			}
+			
+			for(Entidad entidad : entidades)
+			{
+				entidad.moverse();
+			}
+			
+			for(Entidad entidad : entidadesEliminar)
+			{
+				entidades.remove(entidad);
+			}
+			entidadesEliminar.clear();
+			
+			for(Entidad entidad : entidadesAgregar)
+			{
+				entidades.addLast(entidad);
+			}
+			entidadesAgregar.clear();
 		}
 	}
 }

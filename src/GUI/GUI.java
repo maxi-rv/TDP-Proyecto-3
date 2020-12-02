@@ -7,6 +7,7 @@ import java.awt.event.KeyListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import Juego.HiloJuego;
 import Juego.Juego;
 
 public class GUI {
@@ -14,6 +15,7 @@ public class GUI {
 	protected JFrame frameVentana;
 	protected JPanel panelMapa;
 	protected Juego juego;
+	protected HiloJuego hiloJuego;
 	protected int limiteX;
 	protected int limiteY;
 	
@@ -66,10 +68,16 @@ public class GUI {
 		
 		setearControlJugador();
 		
-		juego.ejecutarJuego();
+		jugarJuego();
 	}
 	
 	
+
+	private void jugarJuego() 
+	{
+		hiloJuego = new HiloJuego(juego);
+		hiloJuego.start();
+	}
 
 	/*
 	 * 

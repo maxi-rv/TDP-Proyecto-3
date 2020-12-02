@@ -31,11 +31,10 @@ public class Mapa
 		}
 		
 		//Redimensionamos la BufferedImage
-		Image imagenRedimensionada = imagenOriginal.getScaledInstance(limX+64, limY+128, Image.SCALE_SMOOTH);
+		Image imagenRedimensionada = imagenOriginal.getScaledInstance(limX, limY, Image.SCALE_SMOOTH);
 		
 		//Creamos el Panel y asignamos la ImageIcon
-		panelMapa = new panelConImagen(imagenRedimensionada);
-		
+		panelMapa = new panelConImagen(imagenRedimensionada);		
 		limiteX = limX;
 		limiteY = limY;
 	}

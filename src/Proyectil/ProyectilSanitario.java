@@ -1,5 +1,6 @@
 package Proyectil;
 
+import ContenedorGrafico.ContenedorGraficoProyectil;
 import Visitor.Visitor;
 
 public class ProyectilSanitario extends Proyectil
@@ -10,6 +11,8 @@ public class ProyectilSanitario extends Proyectil
 	public ProyectilSanitario()
 	{
 		this.damage = 1;
+		this.contenedorGrafico = new ContenedorGraficoProyectil();
+		this.velocidad = 20;
 	}
 	
 	//METODOS

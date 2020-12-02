@@ -47,7 +47,7 @@ public class Nivel
 		this.numeroNivel = numeroNivel;
 	}
 
-	public int getTandaActual() 
+	public int getInfectadosEnTandaACtual() 
 	{
 		int toReturn = tandas[tandaActual];
 		
@@ -58,7 +58,7 @@ public class Nivel
 
 	public boolean quedanTandas()
 	{
-		return (tandaActual == tandas.length - 1);
+		return (tandaActual < tandas.length);
 	}
 	
 }

@@ -34,9 +34,9 @@ public abstract class Entidad
 		{
 			this.posX = 0;
 		}
-		else if(x >= limiteX)
+		else if(x + (this.contenedorGrafico.getLabel().getWidth()) >= limiteX)
 		{
-			this.posX = limiteX;	
+			this.posX = limiteX - this.contenedorGrafico.getLabel().getWidth();
 		}
 		else
 		{
@@ -55,9 +55,9 @@ public abstract class Entidad
 		{
 			this.posY = 0;
 		}
-		else if(y >= limiteY)
+		else if(y + (this.contenedorGrafico.getLabel().getHeight())  >= limiteY)
 		{
-			this.posY = limiteY;	
+			this.posY = limiteY - this.contenedorGrafico.getLabel().getHeight();
 		}
 		else
 		{

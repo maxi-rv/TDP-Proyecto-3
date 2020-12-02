@@ -1,5 +1,6 @@
 package Proyectil;
 
+import ContenedorGrafico.ContenedorGraficoParticula;
 import Visitor.Visitor;
 
 public class ParticulaAlpha extends Particula
@@ -10,6 +11,8 @@ public class ParticulaAlpha extends Particula
 	public ParticulaAlpha()
 	{
 		this.damage = 1;
+		this.contenedorGrafico = new ContenedorGraficoParticula();
+		this.velocidad = 20;
 	}
 	
 	//METODOS

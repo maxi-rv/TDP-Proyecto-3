@@ -14,7 +14,7 @@ public class ContenedorGraficoInfectadoAlpha extends ContenedorGrafico
 	public ContenedorGraficoInfectadoAlpha()
 	{
 		this.imagen = new JLabel();
-		imagen.setSize(51, 82);
+		imagen.setSize(43, 49);
 
 		//Creamos la imagen como una BufferedImage
 		BufferedImage imagenOriginal = null;
