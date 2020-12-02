@@ -61,4 +61,14 @@ public class Nivel
 		return (tandaActual < tandas.length);
 	}
 	
+	public boolean nivelCompletado() {
+		return (tandaActual== (tandas.length -1) && (tandas[tandaActual])==0);
+	}
+	
+	public void restarInfectadoEnTanda () {
+		tandas[tandaActual]--;
+		if(tandas[tandaActual]==0 && (tandaActual!=(tandas.length)-1)){
+			tandaActual++;
+		}
+	}
 }
