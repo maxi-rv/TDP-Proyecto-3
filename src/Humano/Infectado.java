@@ -2,6 +2,8 @@ package Humano;
 
 public abstract class Infectado extends Humano
 {
+	protected int damage;
+	
 	//METODOS
 	public void reducirCargaViral(int damage) 
 	{
@@ -13,4 +15,6 @@ public abstract class Infectado extends Humano
 		setPosY(posY+this.velocidad);
 		this.contenedorGrafico.actualizar(posX,posY);
 	}
+	
+	public abstract int getDamage ();
 }

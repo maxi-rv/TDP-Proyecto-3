@@ -3,6 +3,7 @@ package Humano;
 import Arma.Arma;
 import Juego.Entidad;
 import Proyectil.Proyectil;
+import Visitor.Visitor;
 
 public abstract class Humano extends Entidad
 {
@@ -15,4 +16,6 @@ public abstract class Humano extends Entidad
 	{
 		return arma.disparar(this.posX, this.posY);
 	}
+	
+	
 }

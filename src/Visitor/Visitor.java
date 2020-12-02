@@ -7,7 +7,7 @@ import Premio.Premio;
 import Proyectil.Particula;
 import Proyectil.ProyectilSanitario;
 
-public abstract class Visitor 
+public interface Visitor 
 {
 	public abstract void visitar(Jugador jugador);
 	

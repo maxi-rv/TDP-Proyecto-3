@@ -7,43 +7,29 @@ import Premio.Premio;
 import Proyectil.Particula;
 import Proyectil.ProyectilSanitario;
 
-public class VisitorInfectado extends Visitor
+public class VisitorInfectado implements Visitor
 {
+	protected Infectado infectado;
 
 	@Override
 	public void visitar(Jugador jugador) {
-		// TODO Auto-generated method stub
+		jugador.aumentarCargaViral(infectado.getDamage());
 		
 	}
 
-	@Override
-	public void visitar(Infectado infectado) {
-		// TODO Auto-generated method stub
-		
-	}
+	
+	public void visitar(Infectado infectado) {}
 
-	@Override
-	public void visitar(Premio premio) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void visitar(Particula particula) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void visitar(Premio premio) {}
 
-	@Override
-	public void visitar(ProyectilSanitario proyectil) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void visitar(Juego juego) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void visitar(Particula particula) {}
+
+
+	public void visitar(ProyectilSanitario proyectil) {}
+
+	
+	public void visitar(Juego juego) {}
 
 }

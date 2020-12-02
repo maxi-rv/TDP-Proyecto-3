@@ -7,7 +7,7 @@ import Premio.Premio;
 import Proyectil.Particula;
 import Proyectil.ProyectilSanitario;
 
-public class VisitorPremio extends Visitor
+public class VisitorPremio implements Visitor
 {
 
 	@Override

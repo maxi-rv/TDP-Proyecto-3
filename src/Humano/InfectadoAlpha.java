@@ -25,4 +25,10 @@ public class InfectadoAlpha extends Infectado
 	{
 		// TODO Auto-generated method stub
 	}
+
+	@Override
+	public int getDamage() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
