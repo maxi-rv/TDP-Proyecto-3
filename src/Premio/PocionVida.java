@@ -31,4 +31,16 @@ public class PocionVida  extends ObjetoPrecioso
 		
 	}
 
+	@Override
+	public void eliminar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean listoParaEliminar() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

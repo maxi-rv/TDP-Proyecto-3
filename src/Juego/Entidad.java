@@ -18,6 +18,10 @@ public abstract class Entidad
 	
 	public abstract void moverse();
 	
+	public abstract void eliminar();
+	
+	public abstract boolean listoParaEliminar();
+	
 	public ContenedorGrafico getContenedorGrafico()
 	{
 		return contenedorGrafico;
@@ -26,6 +30,11 @@ public abstract class Entidad
 	public int getPosX() 
 	{
 		return posX;
+	}
+	
+	public int getPosY() 
+	{
+		return posY;
 	}
 
 	public void setPosX(int x) 
@@ -44,14 +53,9 @@ public abstract class Entidad
 		}
 	}
 
-	public int getPosY() 
-	{
-		return posY;
-	}
-
 	public void setPosY(int y) 
 	{
-		if(y<0)
+		if(y<=0)
 		{
 			this.posY = 0;
 		}
@@ -89,6 +93,4 @@ public abstract class Entidad
 	{
 		return velocidad;
 	}
-	
-	
 }

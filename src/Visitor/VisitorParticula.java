@@ -2,7 +2,6 @@ package Visitor;
 
 import Humano.Infectado;
 import Humano.Jugador;
-import Juego.Juego;
 import Premio.Premio;
 import Proyectil.Particula;
 import Proyectil.ProyectilSanitario;
@@ -36,12 +35,6 @@ public class VisitorParticula implements Visitor
 
 	@Override
 	public void visitar(ProyectilSanitario proyectil) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void visitar(Juego juego) {
 		// TODO Auto-generated method stub
 		
 	}

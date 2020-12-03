@@ -12,7 +12,11 @@ public abstract class Infectado extends Humano
 	
 	public void moverse()
 	{
-		setPosY(posY+this.velocidad);
+		if(this.posY==(this.limiteY - this.contenedorGrafico.getLabel().getHeight()))
+			setPosY(0);
+		else
+			setPosY(posY+this.velocidad);
+		
 		this.contenedorGrafico.actualizar(posX,posY);
 	}
 	

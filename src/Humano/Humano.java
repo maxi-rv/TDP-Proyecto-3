@@ -13,7 +13,7 @@ public abstract class Humano extends Entidad
 	//METODOS
 	public Proyectil disparar()	
 	{
-		return arma.disparar(this.posX, this.posY);
+		return arma.disparar();
 	}
 	
 	

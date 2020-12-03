@@ -1,6 +1,6 @@
 package Proyectil;
 
-import ContenedorGrafico.ContenedorGraficoProyectil;
+import ContenedorGrafico.ContenedorGraficoProyectilSanitario;
 import Visitor.Visitor;
 
 public class ProyectilSanitario extends Proyectil
@@ -11,15 +11,18 @@ public class ProyectilSanitario extends Proyectil
 	public ProyectilSanitario()
 	{
 		this.damage = 1;
-		this.contenedorGrafico = new ContenedorGraficoProyectil();
-		this.velocidad = 20;
+		this.contenedorGrafico = new ContenedorGraficoProyectilSanitario();
+		this.velocidad = 15;
 	}
 	
 	//METODOS
 	@Override
 	public void moverse() 
 	{
+		setPosX(posX);
+		setPosY(posY-this.velocidad);
 		
+		this.contenedorGrafico.actualizar(posX,posY);
 	}
 
 	@Override
@@ -31,5 +34,17 @@ public class ProyectilSanitario extends Proyectil
 	public Proyectil clone()
 	{
 		return new ProyectilSanitario();
+	}
+
+	@Override
+	public void eliminar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean listoParaEliminar() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

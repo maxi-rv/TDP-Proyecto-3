@@ -14,7 +14,7 @@ public class ContenedorGraficoParticula extends ContenedorGrafico
 	public ContenedorGraficoParticula()
 	{
 		this.imagen = new JLabel();
-		imagen.setSize(45, 45);
+		imagen.setSize(23, 23);
 		
 		//Creamos la imagen como una BufferedImage
 		BufferedImage imagenOriginal = null;

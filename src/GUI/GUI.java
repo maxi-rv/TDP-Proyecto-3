@@ -59,7 +59,7 @@ public class GUI {
 		
 		frameVentana = new JFrame();
 		frameVentana.setTitle("Robot vs Infectados");
-		frameVentana.setResizable(true);
+		frameVentana.setResizable(false);
 		frameVentana.setBounds(0, 0, limiteX, limiteY);
 		frameVentana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frameVentana.setLocationRelativeTo(null);
@@ -123,7 +123,7 @@ public class GUI {
 				juego.moverJugador("Derecha");
 			}
 			
-			if(e.getExtendedKeyCode() == KeyEvent.VK_SPACE)
+			if(e.getExtendedKeyCode() == KeyEvent.VK_UP)
 			{
 				juego.disparaJugador();
 			}

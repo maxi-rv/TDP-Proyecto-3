@@ -9,12 +9,12 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class ContenedorGraficoProyectil extends ContenedorGrafico
+public class ContenedorGraficoProyectilSanitario extends ContenedorGrafico
 {
-	public ContenedorGraficoProyectil()
+	public ContenedorGraficoProyectilSanitario()
 	{
 		this.imagen = new JLabel();
-		imagen.setSize(29, 69);
+		imagen.setSize(16, 34);
 		
 		//Creamos la imagen como una BufferedImage
 		BufferedImage imagenOriginal = null;

@@ -30,4 +30,16 @@ public class Jugador extends Humano
 		this.contenedorGrafico.actualizar(posX,posY);
 	}
 
+	@Override
+	public void eliminar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean listoParaEliminar() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

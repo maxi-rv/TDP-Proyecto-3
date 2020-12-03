@@ -45,11 +45,6 @@ public class Mapa
 		panelMapa.add(entidad.getContenedorGrafico().getLabel());
 	}
 	
-	public void actualizarEntidad(Entidad entidad)
-	{
-		
-	}
-	
 	public void eliminarEntidad(Entidad entidad)
 	{
 		

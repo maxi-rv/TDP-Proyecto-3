@@ -2,7 +2,6 @@ package Visitor;
 
 import Humano.Infectado;
 import Humano.Jugador;
-import Juego.Juego;
 import Premio.Premio;
 import Proyectil.Particula;
 import Proyectil.ProyectilSanitario;
@@ -18,6 +17,4 @@ public interface Visitor
 	public abstract void visitar(Particula particula);
 	
 	public abstract void visitar(ProyectilSanitario proyectil);
-	
-	public abstract void visitar(Juego juego);
 }

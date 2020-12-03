@@ -74,12 +74,23 @@ public class Juego
 			jugador.setPosX(jugador.getPosX()+jugador.getVelocidad());
 		}
 				
-		jugador.moverse(); //Esto no deberia hacerse.
+		jugador.moverse();
 	}
 
 	public void disparaJugador() 
 	{
 		Entidad proyectil = jugador.disparar();
+		
+		proyectil.setLimiteX(mapaActual.getLimiteX());
+		proyectil.setLimiteY(mapaActual.getLimiteY());
+		
+		proyectil.setPosX(jugador.getPosX());
+		proyectil.setPosY(jugador.getPosY());
+		
+		this.mapaActual.insertarEntidad(proyectil);
+		
+		proyectil.getContenedorGrafico().actualizar(proyectil.getPosX(),proyectil.getPosY());
+		
 		entidadesAgregar.addLast(proyectil);
 	}
 	
@@ -127,7 +138,13 @@ public class Juego
 		{
 			try 
 			{
-				Thread.sleep(200);
+				Thread.sleep(15);
+				/*
+				 * Actualizaciones de juego cada 15 milisegundos para animaciones mas fluidas
+				 * Esto es aproximado a 60 actualizaciones por segundo, lo cual hace
+				 * un paralelo a 60 frames por segundo.
+				 * 
+				 */
 			} 
 			catch (InterruptedException e) 
 			{
@@ -137,6 +154,7 @@ public class Juego
 			for(Entidad entidad : entidades)
 			{
 				entidad.moverse();
+				chequearColisiones(entidad);
 			}
 			
 			for(Entidad entidad : entidadesEliminar)
@@ -151,5 +169,10 @@ public class Juego
 			}
 			entidadesAgregar.clear();
 		}
+	}
+
+	private void chequearColisiones(Entidad entidad) 
+	{
+		
 	}
 }

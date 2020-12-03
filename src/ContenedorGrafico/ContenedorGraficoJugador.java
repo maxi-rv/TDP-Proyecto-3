@@ -14,7 +14,7 @@ public class ContenedorGraficoJugador extends ContenedorGrafico
 	public ContenedorGraficoJugador()
 	{
 		this.imagen = new JLabel();
-		imagen.setSize(51, 82);
+		imagen.setSize(39, 62);
 		
 		//Creamos la imagen como una BufferedImage
 		BufferedImage imagenOriginal = null;

@@ -11,7 +11,7 @@ public class InfectadoAlpha extends Infectado
 	{
 		this.arma = ar;
 		this.contenedorGrafico = new ContenedorGraficoInfectadoAlpha();
-		this.velocidad = 5;
+		this.velocidad = 3;
 	}
 	
 	//METODOS
@@ -30,5 +30,17 @@ public class InfectadoAlpha extends Infectado
 	public int getDamage() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public void eliminar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean listoParaEliminar() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
