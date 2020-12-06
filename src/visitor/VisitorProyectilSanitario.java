@@ -8,35 +8,27 @@ import proyectil.ProyectilSanitario;
 
 public class VisitorProyectilSanitario implements Visitor
 {
-
-	@Override
-	public void visitar(Jugador jugador) {
-		// TODO Auto-generated method stub
-		
+	private ProyectilSanitario proyectilSanitario;
+	
+	public VisitorProyectilSanitario(ProyectilSanitario ps) {
+		proyectilSanitario=ps;
 	}
 
-	@Override
+
+	public void visitar(Jugador jugador) {}
+
+	
 	public void visitar(Infectado infectado) {
-		// TODO Auto-generated method stub
-		
+		infectado.reducirCargaViral(proyectilSanitario.clone().getDamage());
 	}
 
-	@Override
-	public void visitar(Premio premio) {
-		// TODO Auto-generated method stub
-		
-	}
+	
+	public void visitar(Premio premio) {}
 
-	@Override
-	public void visitar(Particula particula) {
-		// TODO Auto-generated method stub
-		
-	}
+	
+	public void visitar(Particula particula) {}
 
-	@Override
-	public void visitar(ProyectilSanitario proyectil) {
-		// TODO Auto-generated method stub
-		
-	}
+	
+	public void visitar(ProyectilSanitario proyectil) {}
 
 }

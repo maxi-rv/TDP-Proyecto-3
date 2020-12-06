@@ -9,34 +9,18 @@ import proyectil.ProyectilSanitario;
 public class VisitorPremio implements Visitor
 {
 
-	@Override
-	public void visitar(Jugador jugador) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void visitar(Jugador jugador) {}
 
-	@Override
-	public void visitar(Infectado infectado) {
-		// TODO Auto-generated method stub
-		
-	}
+	
+	public void visitar(Infectado infectado) {}
 
-	@Override
-	public void visitar(Premio premio) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void visitar(Particula particula) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void visitar(Premio premio) {}
 
-	@Override
-	public void visitar(ProyectilSanitario proyectil) {
-		// TODO Auto-generated method stub
-		
-	}
+	
+	public void visitar(Particula particula) {}
+
+	
+	public void visitar(ProyectilSanitario proyectil) {}
 
 }

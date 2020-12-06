@@ -9,15 +9,16 @@ import proyectil.ProyectilSanitario;
 
 public class VisitorJugador implements Visitor
 {
-
+	private Jugador jugador;
+	
+	public VisitorJugador (Jugador j) {
+		jugador=j;
+	}
 
 	public void visitar(Jugador jugador) {}
 
 	@Override
-	public void visitar(Infectado infectado) {
-		// TODO Auto-generated method stub
-		//ATACAR?
-	}
+	public void visitar(Infectado infectado) {}
 
 
 	public void visitar(Premio premio) {
@@ -26,7 +27,7 @@ public class VisitorJugador implements Visitor
 
 	
 	public void visitar(Particula particula) {
-		// TODO Auto-generated method stub
+		jugador.aumentarCargaViral(particula.clone().getDamage());
 		
 	}
 

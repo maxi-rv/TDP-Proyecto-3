@@ -22,7 +22,6 @@ public class VisitorInfectado implements Visitor
 	public void visitar(Jugador jugador) 
 	{
 		jugador.aumentarCargaViral(infectado.getCloseDamage());
-		//jugador.aumentarCargaViral(1);
 	}
 
 	
@@ -38,7 +37,6 @@ public class VisitorInfectado implements Visitor
 	public void visitar(ProyectilSanitario proyectil) 
 	{
 		infectado.reducirCargaViral(proyectil.getDamage());
-		//jugador.reducirCargaViral(1);
 	}
 
 }
