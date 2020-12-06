@@ -3,6 +3,7 @@ package proyectil;
 import contenedorGrafico.ContenedorGraficoProyectilSanitario;
 import logica.Entidad;
 import visitor.Visitor;
+import visitor.VisitorProyectilSanitario;
 
 public class ProyectilSanitario extends Proyectil
 {
@@ -14,6 +15,8 @@ public class ProyectilSanitario extends Proyectil
 		this.damage = 1;
 		this.contenedorGrafico = new ContenedorGraficoProyectilSanitario();
 		this.velocidad = 15;
+		
+		this.visitor = new VisitorProyectilSanitario(this);
 	}
 	
 	//METODOS

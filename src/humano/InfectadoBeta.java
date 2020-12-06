@@ -3,6 +3,7 @@ package humano;
 import arma.ArmaViralBeta;
 import contenedorGrafico.ContenedorGraficoInfectadoBeta;
 import visitor.Visitor;
+import visitor.VisitorInfectado;
 
 public class InfectadoBeta extends Infectado
 {
@@ -13,6 +14,8 @@ public class InfectadoBeta extends Infectado
 		this.contenedorGrafico = new ContenedorGraficoInfectadoBeta();
 		this.velocidad = 1;
 		this.closeDamage = 1;
+		this.visitor = new VisitorInfectado(this);
+		this.cargaViral = 4;
 		
 		this.tiempoInicial = System.currentTimeMillis();
 	}	

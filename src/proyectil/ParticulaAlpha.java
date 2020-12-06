@@ -3,6 +3,7 @@ package proyectil;
 import contenedorGrafico.ContenedorGraficoParticula;
 import logica.Entidad;
 import visitor.Visitor;
+import visitor.VisitorParticula;
 
 public class ParticulaAlpha extends Particula
 {
@@ -14,6 +15,10 @@ public class ParticulaAlpha extends Particula
 		this.damage = 1;
 		this.contenedorGrafico = new ContenedorGraficoParticula();
 		this.velocidad = 7;
+		this.rango = 350;
+		this.recorrido = 0;
+		
+		this.visitor = new VisitorParticula(this);
 	}
 	
 	//METODOS
@@ -22,6 +27,7 @@ public class ParticulaAlpha extends Particula
 	{
 		setPosX(posX);
 		setPosY(posY+this.velocidad);
+		recorrido = recorrido+velocidad;
 		
 		this.contenedorGrafico.actualizar(posX,posY);
 		

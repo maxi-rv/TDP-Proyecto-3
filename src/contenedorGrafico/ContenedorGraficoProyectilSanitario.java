@@ -20,7 +20,7 @@ public class ContenedorGraficoProyectilSanitario extends ContenedorGrafico
 		BufferedImage imagenOriginal = null;
 		try 
 		{
-			imagenOriginal = ImageIO.read(new File("src/Sprites/MedicineRed.png"));
+			imagenOriginal = ImageIO.read(new File("src/Sprites/MedicineGreen.png"));
 		} 
 		catch (IOException e) 
 		{

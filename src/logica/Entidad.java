@@ -12,6 +12,7 @@ public abstract class Entidad
 	protected int limiteY;
 	protected int velocidad;
 	protected ContenedorGrafico contenedorGrafico;
+	protected Visitor visitor;
 	
 	//METODOS
 	public abstract void aceptar(Visitor v);
@@ -103,5 +104,31 @@ public abstract class Entidad
 	public int getVelocidad() 
 	{
 		return velocidad;
+	}
+	
+	public Visitor getVisitor() 
+	{
+		return this.visitor;
+	}
+	
+	public boolean chequearColision(Entidad otraEntidad)
+	{
+		boolean toReturn = false;
+		
+		int extremoAX = posX;
+		int extremoBX = posX + this.contenedorGrafico.getLabel().getWidth();
+		int extremoAY = posY;
+		int extremoBY = posY + this.contenedorGrafico.getLabel().getHeight();
+		
+		int otroExtremoAX = otraEntidad.getPosX();
+		int otroExtremoBX = otraEntidad.getPosX() + otraEntidad.contenedorGrafico.getLabel().getWidth();
+		int otroExtremoAY = otraEntidad.getPosY();
+		int otroExtremoBY = otraEntidad.getPosY() + otraEntidad.contenedorGrafico.getLabel().getHeight();
+		
+		if((extremoAX<=otroExtremoAX && otroExtremoAX<=extremoBX)||(extremoAX<=otroExtremoBX && otroExtremoBX<=extremoBX))
+			if((extremoAY<=otroExtremoAY && otroExtremoAY<=extremoBY)||(extremoAY<=otroExtremoBY && otroExtremoBY<=extremoBY))
+				toReturn = true;
+		
+		return toReturn;
 	}
 }

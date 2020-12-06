@@ -1,16 +1,19 @@
-package gUI;
+package gui;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 import logica.HiloJuego;
 import logica.Juego;
 
-public class gUI {
+public class GUI {
 
 	protected JFrame frameVentana;
 	protected JPanel panelMapa;
@@ -30,7 +33,7 @@ public class gUI {
 			{
 				try 
 				{
-					gUI window = new gUI();
+					GUI window = new GUI();
 					window.frameVentana.setVisible(true);
 				} 
 				catch (Exception e) 
@@ -44,7 +47,7 @@ public class gUI {
 	/**
 	 * Create the application.
 	 */
-	public gUI() 
+	public GUI() 
 	{
 		initialize();
 	}
@@ -54,8 +57,8 @@ public class gUI {
 	 */
 	private void initialize() 
 	{
-		limiteX = 500;
-		limiteY = 500;
+		limiteX = 640;
+		limiteY = 640;
 		
 		frameVentana = new JFrame();
 		frameVentana.setTitle("Robot vs Infectados");
@@ -99,40 +102,61 @@ public class gUI {
 	}
 	
 	//CLASE ANIDADA
-	private class EscuchaTeclado implements KeyListener
-	{
-		public void keyPressed(KeyEvent e) 
-		{
-			actuar(e);
-		}
+	private class EscuchaTeclado implements KeyListener,ActionListener
+    {
 
-		public void keyTyped(KeyEvent e) 
-		{
-			actuar(e);
-		}
-		
-		private void actuar(KeyEvent e)
-		{  
-			if(e.getExtendedKeyCode() == KeyEvent.VK_LEFT)
-			{
-				juego.moverJugador("Izquierda");
-			}
+        Timer miTimer;
 
-			if(e.getExtendedKeyCode() == KeyEvent.VK_RIGHT)
-			{
-				juego.moverJugador("Derecha");
-			}
-			
-			if(e.getExtendedKeyCode() == KeyEvent.VK_UP)
-			{
-				juego.disparaJugador();
-			}
-		}
-		
-		public void keyReleased(KeyEvent e) 
+        public EscuchaTeclado() 
+        {
+            miTimer = new Timer(300, this);
+        }
+        
+        public void keyPressed(KeyEvent e) 
+        {
+            actuar(e);
+        }
+        
+        public void keyReleased(KeyEvent e) 
+        {
+            miTimer.stop();
+            
+            if(e.getExtendedKeyCode() == KeyEvent.VK_UP)
+            {
+                juego.disparaJugador();
+            }
+        }
+        
+        public void actionPerformed(ActionEvent e) 
+        {
+            juego.disparaJugador();
+        }
+
+		@Override
+		public void keyTyped(KeyEvent arg0) 
 		{
 			
 		}
-	}
+        
+        protected void actuar(KeyEvent e)
+        {
+            if(e.getExtendedKeyCode() == KeyEvent.VK_LEFT)
+            {
+                juego.moverJugador("Izquierda");
+            }
+
+            if(e.getExtendedKeyCode() == KeyEvent.VK_RIGHT)
+            {
+                juego.moverJugador("Derecha");
+            }
+
+            if(e.getExtendedKeyCode() == KeyEvent.VK_UP)
+            {
+                miTimer.start();
+            }
+        }
+
+        
+    }
 
 }

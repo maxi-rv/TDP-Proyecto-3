@@ -4,6 +4,7 @@ import arma.ArmaSanitaria;
 import contenedorGrafico.ContenedorGraficoJugador;
 import logica.Entidad;
 import visitor.Visitor;
+import visitor.VisitorJugador;
 
 public class Jugador extends Humano
 {
@@ -13,6 +14,7 @@ public class Jugador extends Humano
 		this.arma = ar;
 		this.contenedorGrafico = new ContenedorGraficoJugador();
 		this.velocidad = 15;
+		this.visitor = new VisitorJugador(this);
 	}
 	
 	//METODOS

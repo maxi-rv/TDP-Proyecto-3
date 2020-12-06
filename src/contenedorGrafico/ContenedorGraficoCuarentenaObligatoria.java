@@ -9,18 +9,18 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class ContenedorGraficoParticula extends ContenedorGrafico
+public class ContenedorGraficoCuarentenaObligatoria extends ContenedorGrafico
 {
-	public ContenedorGraficoParticula()
+	public ContenedorGraficoCuarentenaObligatoria()
 	{
 		this.imagen = new JLabel();
-		imagen.setSize(23, 23);
-		
+		imagen.setSize(48, 43);
+
 		//Creamos la imagen como una BufferedImage
 		BufferedImage imagenOriginal = null;
 		try 
 		{
-			imagenOriginal = ImageIO.read(new File("src/Sprites/ParticulaYellow.png"));
+			imagenOriginal = ImageIO.read(new File("src/Sprites/House.png"));
 		} 
 		catch (IOException e) 
 		{

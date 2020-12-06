@@ -22,7 +22,6 @@ public abstract class Infectado extends Humano
 			particula = this.disparar();
 		}
 		
-		
 		this.contenedorGrafico.actualizar(posX,posY);
 		
 		return particula;
@@ -35,7 +34,7 @@ public abstract class Infectado extends Humano
 	
 	public boolean listoParaEliminar() 
 	{
-		return this.cargaViral==10;
+		return this.cargaViral<=0;
 	}
 	
 	public int getCloseDamage()
@@ -50,7 +49,7 @@ public abstract class Infectado extends Humano
 		long tiempoActual = System.currentTimeMillis();
         int segundos = (int)((tiempoActual - this.tiempoInicial) / 1000);
         
-        if(segundos == 5)
+        if(segundos == 3)
         {
         	this.tiempoInicial = System.currentTimeMillis();
         	toReturn = true;

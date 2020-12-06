@@ -63,6 +63,6 @@ public class Nivel
 	
 	public boolean nivelCompletado() 
 	{
-		return (tandaActual == tandas.length);
+		return (tandaActual >= tandas.length);
 	}
 }

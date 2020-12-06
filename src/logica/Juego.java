@@ -6,7 +6,9 @@ import java.util.Random;
 import fabrica.Fabrica;
 import fabrica.FabricaInfectado;
 import fabrica.FabricaJugador;
+import fabrica.FabricaPremio;
 import humano.Jugador;
+import visitor.Visitor;
 
 
 /**
@@ -25,17 +27,20 @@ public class Juego
 	protected Jugador jugador;
 	protected Fabrica fabricaJugador;
 	protected Fabrica fabricaInfectado;
+	protected Fabrica fabricaPremio;
 	
 	//CONSTRUCTOR
 	protected Juego(int limX, int limY)
 	{
 		mapaActual = new Mapa(limX, limY);
+		
 		entidades = new LinkedList<Entidad>();
 		entidadesAgregar = new LinkedList<Entidad>();
 		entidadesEliminar = new LinkedList<Entidad>();
 		
 		fabricaJugador = new FabricaJugador(mapaActual.getLimiteX(), mapaActual.getLimiteY());
 		fabricaInfectado = new FabricaInfectado(mapaActual.getLimiteX(), mapaActual.getLimiteY());
+		fabricaPremio = new FabricaPremio(mapaActual.getLimiteX(), mapaActual.getLimiteY());
 		
 		jugador = (Jugador) fabricaJugador.crearEntidad();
 		mapaActual.insertarEntidad(jugador);
@@ -89,21 +94,21 @@ public class Juego
 	 */
 	public void ejecutarJuego() 
 	{
+		//GENERA UN NUEVO NIVEL
 		if(nivelActual.nivelCompletado() && entidades.isEmpty())
 		{
 			this.nivelActual.generarNuevoNivel();
 			System.out.println("Nivel:"+nivelActual.getNumeroNivel());
 		}
 		
+		//CARGA UNA TANDA
 		if(nivelActual.quedanTandas() && entidades.isEmpty())
 		{
 			cargarTanda();
 		}
 		
-		if(nivelActual.quedanTandas())
-		{
-			jugarTanda();
-		}
+		//JUEGA RONDAS
+		jugarRonda();
 	}
 	
 	protected void cargarTanda()
@@ -112,7 +117,8 @@ public class Juego
 			
 		Random randomNumGen = new Random();
 		
-		System.out.println("Cant Infectados:"+cantInfectados);
+		System.out.println("Cant. Infectados en Tanda:"+cantInfectados);
+		
 		for(int i=0; i<cantInfectados; i++)
 		{
 			Entidad infectado = fabricaInfectado.crearEntidad();
@@ -129,7 +135,7 @@ public class Juego
 		}
 	}
 
-	protected void jugarTanda() 
+	protected void jugarRonda() 
 	{
 		if(!entidades.isEmpty())
 		{
@@ -177,6 +183,16 @@ public class Juego
 
 	private void chequearColisiones(Entidad entidad) 
 	{
-		
+		for(Entidad otraEntidad : entidades)
+		{
+			if(entidad != otraEntidad)
+			{
+				if(entidad.chequearColision(otraEntidad))
+				{
+					Visitor visitor = entidad.getVisitor();
+					otraEntidad.aceptar(visitor);
+				}
+			}
+		}
 	}
 }
