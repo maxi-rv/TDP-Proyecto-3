@@ -22,7 +22,7 @@ public class VisitorJugador implements Visitor
 
 
 	public void visitar(Premio premio) {
-		premio.efecto();
+		premio.getEstrategia().efecto();
 	}
 
 	
