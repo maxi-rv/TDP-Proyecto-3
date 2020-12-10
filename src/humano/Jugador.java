@@ -1,5 +1,6 @@
 package humano;
 
+import arma.Arma;
 import arma.ArmaSanitaria;
 import contenedorGrafico.ContenedorGraficoJugador;
 import logica.Entidad;
@@ -39,6 +40,10 @@ public class Jugador extends Humano
 	public boolean listoParaEliminar() 
 	{
 		return this.cargaViral==10;
+	}
+	
+	public Arma getArma(){
+		return this.arma;		
 	}
 
 }

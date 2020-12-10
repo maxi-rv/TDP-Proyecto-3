@@ -1,22 +1,25 @@
 package premio;
 
-import logica.Entidad;
-import visitor.Visitor;
+import java.util.LinkedList;
 
-public class PocionVida  implements Estrategia
-{
+import humano.Infectado;
+import humano.Jugador;
 
-	@Override
-	public void efecto() 
-	{
-		// TODO Auto-generated method stub
-		recuperarVida();
+
+public class PocionVida  implements Estrategia{
+
+
+	public void efecto(Jugador jugador, LinkedList<Infectado> infectados) {
+		recuperarVida(jugador);
+		
 	}
-
-	private void recuperarVida() 
-	{
+	
+	private void recuperarVida(Jugador jugador){
+		int cura;
 		
+		cura = -75;
 		
+		jugador.aumentarCargaViral(cura);		
 	}
 
 

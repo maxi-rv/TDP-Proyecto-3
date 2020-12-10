@@ -9,6 +9,15 @@ public abstract class Proyectil extends Entidad
 	protected boolean listoParaEliminar;
 	
 	//METODOS
+	
+	public void multiplicarDaño(){
+		damage = damage*2;
+	}
+	
+	public void normalizarDaño(){
+		damage = damage/2;
+	}
+	
 	public int getDamage()
 	{
 		return damage;

@@ -21,7 +21,7 @@ public class VisitorJugador implements Visitor
 
 
 	public void visitar(Premio premio) {
-		premio.getEstrategia().efecto();
+		premio.efecto();
 	}
 
 	public void visitar(Particula particula) {}

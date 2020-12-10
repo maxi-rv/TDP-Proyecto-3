@@ -15,4 +15,8 @@ public abstract class Arma
 		Proyectil proy = proyectil.clone();
 		return proy;
 	}
+	
+	public Proyectil getProyectil(){
+		return proyectil;
+	}
 }

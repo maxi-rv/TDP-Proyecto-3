@@ -58,4 +58,13 @@ public abstract class Infectado extends Humano
 		
 		return toReturn;
 	}
+	
+	public void detener(){
+		velocidad = 0;		
+	}
+	
+	public void reanudar(){
+		
+		velocidad = 1;
+	}
 }

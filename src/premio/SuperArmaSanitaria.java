@@ -1,19 +1,42 @@
 package premio;
 
-import logica.Entidad;
-import visitor.Visitor;
+import java.util.LinkedList;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import humano.Infectado;
+import humano.Jugador;
+
 
 public class SuperArmaSanitaria  implements Estrategia
 {
 
-	@Override
-	public void efecto() 
+	
+	public void efecto(Jugador jugador, LinkedList<Infectado> infectados) 
 	{
-		aumentarPoder();
+		aumentarPoder(jugador);
 	}
 
-	private void aumentarPoder() 
+	private void aumentarPoder(Jugador jugador) 
 	{
+		Timer timer = new Timer();
+		
+		jugador.getArma().getProyectil().multiplicarDaño();
+		
+		TimerTask tarea = new TimerTask(){
+
+			
+			public void run() {
+				
+				jugador.getArma().getProyectil().normalizarDaño();
+			}
+			
+			
+			
+		};
+		
+		timer.schedule(tarea,15000);
+		
 		
 		
 	}
