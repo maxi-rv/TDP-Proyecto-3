@@ -88,8 +88,10 @@ public class GUI {
 	private void iniciarJuego() 
 	{
 		juego = Juego.obtenerInstancia(limiteX, limiteY);
+		
 		panelMapa = juego.getMapa().getPanel();
 		panelMapa.setLocation(0, 0);
+		
 		frameVentana.getContentPane().add(panelMapa);
 		frameVentana.pack();
 	}
@@ -97,6 +99,7 @@ public class GUI {
 	private void setearControlJugador() 
 	{
 		KeyListener escucha = new EscuchaTeclado();
+		
 		panelMapa.addKeyListener(escucha);
 		panelMapa.setFocusable(true);
 	}

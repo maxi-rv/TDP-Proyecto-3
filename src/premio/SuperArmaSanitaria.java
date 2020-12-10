@@ -4,20 +4,20 @@ import java.util.LinkedList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import humano.Infectado;
 import humano.Jugador;
+import logica.Entidad;
 
 
 public class SuperArmaSanitaria  implements Estrategia
 {
 
 	
-	public void efecto(Jugador jugador, LinkedList<Infectado> infectados) 
+	public void efecto(Jugador jugador, LinkedList<Entidad> infectados, Premio premio) 
 	{
-		aumentarPoder(jugador);
+		aumentarPoder(jugador, premio);
 	}
 
-	private void aumentarPoder(Jugador jugador) 
+	private void aumentarPoder(Jugador jugador, Premio premio) 
 	{
 		Timer timer = new Timer();
 		
@@ -29,6 +29,7 @@ public class SuperArmaSanitaria  implements Estrategia
 			public void run() {
 				
 				jugador.getArma().getProyectil().normalizarDaño();
+				premio.prepararParaEliminar();
 			}
 			
 			

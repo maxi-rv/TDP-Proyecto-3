@@ -7,37 +7,36 @@ import java.util.TimerTask;
 import humano.Infectado;
 import humano.Jugador;
 import logica.Entidad;
-import visitor.Visitor;
 
 public class CuarentenaObligatoria implements Estrategia
 {
-
 	
-	public void efecto(Jugador jugador, LinkedList<Infectado> infectados) 	{
 	
-		detenerInfectados(infectados);
+	public void efecto(Jugador jugador, LinkedList<Entidad> infectados, Premio premio)
+	{
+		detenerInfectados(infectados, premio);
 	}
 
-	private void detenerInfectados( LinkedList<Infectado> infectados) 
+	private void detenerInfectados(LinkedList<Entidad> infectados, Premio premio) 
 	{
 		Timer timer = new Timer();		
 		
-		
-		for(Infectado i : infectados){
-			i.detener();
+		for(Entidad i : infectados)
+		{
+			Infectado inf = (Infectado)i;
+			inf.detener();
 		}
 		
-		TimerTask tarea = new TimerTask(){
-
-			
-			public void run() {
-				for(Infectado i : infectados){
-					i.reanudar();
+		TimerTask tarea = new TimerTask() {
+			public void run() 
+			{
+				for(Entidad i : infectados)
+				{
+					Infectado inf = (Infectado)i;
+					inf.reanudar();
+					premio.prepararParaEliminar();
 				}				
 			}
-			
-			
-			
 		};
 		
 		timer.schedule(tarea,8000);

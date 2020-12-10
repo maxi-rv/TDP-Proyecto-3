@@ -20,7 +20,7 @@ public class ContenedorGraficoPocionVida extends ContenedorGrafico
 		BufferedImage imagenOriginal = null;
 		try 
 		{
-			imagenOriginal = ImageIO.read(new File("src/Sprites/Botiquin.png"));
+			imagenOriginal = ImageIO.read(new File("src/Sprites/Hamburger.png"));
 		} 
 		catch (IOException e) 
 		{

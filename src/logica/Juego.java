@@ -8,6 +8,7 @@ import fabrica.FabricaInfectado;
 import fabrica.FabricaJugador;
 import fabrica.FabricaPremio;
 import humano.Jugador;
+import premio.Premio;
 import visitor.Visitor;
 
 
@@ -21,9 +22,13 @@ public class Juego
 	protected static Juego instancia;
 	protected Nivel nivelActual;
 	protected Mapa mapaActual;
-	protected LinkedList<Entidad> entidadesOtras;
-	protected LinkedList<Entidad> entidadesOtrasAgregar;
-	protected LinkedList<Entidad> entidadesOtrasEliminar;
+	protected LinkedList<Entidad> proyectiles;
+	protected LinkedList<Entidad> proyectilesAgregar;
+	protected LinkedList<Entidad> proyectilesEliminar;
+	protected LinkedList<Entidad> premios;
+	protected LinkedList<Entidad> premiosAgregar;
+	protected LinkedList<Entidad> premiosEliminar;
+	protected LinkedList<Entidad> premiosEnEspera;
 	protected LinkedList<Entidad> infectados;
 	protected LinkedList<Entidad> infectadosEliminar;
 	protected Jugador jugador;
@@ -36,16 +41,20 @@ public class Juego
 	{
 		mapaActual = new Mapa(limX, limY);
 		
-		entidadesOtras = new LinkedList<Entidad>();
-		entidadesOtrasAgregar = new LinkedList<Entidad>();
-		entidadesOtrasEliminar = new LinkedList<Entidad>();
+		proyectiles = new LinkedList<Entidad>();
+		proyectilesAgregar = new LinkedList<Entidad>();
+		proyectilesEliminar = new LinkedList<Entidad>();
+		
+		premios = new LinkedList<Entidad>();
+		premiosAgregar = new LinkedList<Entidad>();
+		premiosEnEspera = new LinkedList<Entidad>();
+		premiosEliminar = new LinkedList<Entidad>();
 		
 		infectados = new LinkedList<Entidad>();
 		infectadosEliminar = new LinkedList<Entidad>();
 		
 		fabricaJugador = new FabricaJugador(mapaActual.getLimiteX(), mapaActual.getLimiteY());
 		fabricaInfectado = new FabricaInfectado(mapaActual.getLimiteX(), mapaActual.getLimiteY());
-		fabricaPremio = new FabricaPremio(mapaActual.getLimiteX(), mapaActual.getLimiteY());
 		
 		jugador = (Jugador) fabricaJugador.crearEntidad();
 		mapaActual.insertarEntidad(jugador);
@@ -91,19 +100,18 @@ public class Juego
 	{
 		Entidad proyectil = jugador.disparar();
 		
-		entidadesOtrasAgregar.addLast(proyectil);
+		proyectilesAgregar.addLast(proyectil);
 	}
 	
 	/*
 	 * Esto deberia ejectuarse en un hilo.
 	 */
-	public void ejecutarJuego() 
+	public void ejecutarJuego() throws GameOverException 
 	{
 		//GENERA UN NUEVO NIVEL
 		if(nivelActual.nivelCompletado() && infectados.isEmpty())
 		{
 			this.nivelActual.generarNuevoNivel();
-			System.out.println("Nivel:"+nivelActual.getNumeroNivel());
 		}
 		
 		//CARGA UNA TANDA
@@ -122,8 +130,6 @@ public class Juego
 			
 		Random randomNumGen = new Random();
 		
-		System.out.println("Cant. Infectados en Tanda:"+cantInfectados);
-		
 		for(int i=0; i<cantInfectados; i++)
 		{
 			Entidad infectado = fabricaInfectado.crearEntidad();
@@ -135,26 +141,123 @@ public class Juego
 			infectado.getContenedorGrafico().actualizar(infectado.getPosX(), infectado.getPosY());
 			
 			infectados.addLast(infectado);
-			
-			System.out.println(i);
 		}
 	}
 
-	protected void jugarRonda() 
+	protected void jugarRonda() throws GameOverException 
 	{
+		if(jugador.listoParaEliminar())
+			throw new GameOverException("GAME OVER!");
+		
 		if(!infectados.isEmpty())
 		{
+			this.realizarComportamiento(proyectiles, proyectilesAgregar, proyectilesEliminar);
+			this.realizarComportamiento(infectados, proyectilesAgregar, infectadosEliminar);
+			this.realizarComportamiento(premios, premiosAgregar, premiosEnEspera);
 			
-			this.realizarComportamiento(entidadesOtras, entidadesOtrasAgregar, entidadesOtrasEliminar);
-			this.realizarComportamiento(infectados, entidadesOtrasAgregar, infectadosEliminar);
+			this.chequearColisionesCruzado(proyectiles, infectados, proyectilesAgregar, infectadosEliminar);
+			this.chequearColisionesCruzado(infectados, proyectiles, proyectilesAgregar, proyectilesEliminar);
+			this.chequearColisionJugador();
 			
-			this.chequearColisionesCruzado(entidadesOtras, infectados, entidadesOtrasAgregar, infectadosEliminar);
-			this.chequearColisionesCruzado(infectados, entidadesOtras, entidadesOtrasAgregar, entidadesOtrasEliminar);
+			this.eliminarEntidades(proyectiles, proyectilesEliminar);
+			this.eliminarInfectados();
+			this.eliminarPremios();
 			
-			this.eliminarEntidades(entidadesOtras, entidadesOtrasEliminar);
-			this.eliminarEntidades(infectados, infectadosEliminar);
+			this.agregarEntidades(proyectiles, proyectilesAgregar);
+			this.agregarEntidades(premios, premiosAgregar);
+		}
+	}
+	
+	private void eliminarPremios() 
+	{
+		for(Entidad premio : premiosEnEspera)
+		{
+			premios.remove(premio);
+			mapaActual.eliminarEntidad(premio);
 			
-			this.agregarEntidades(entidadesOtras, entidadesOtrasAgregar);
+			if(premio.listoParaEliminar())
+			{
+				premiosEliminar.addLast(premio);
+			}	
+		}
+		
+		for(Entidad premio : premiosEliminar)
+		{
+			premio.eliminar();
+			premiosEnEspera.remove(premio);
+		}
+		premiosEliminar.clear();
+	}
+
+	private void eliminarInfectados() 
+	{
+		for(Entidad infectado : infectadosEliminar)
+		{
+			Random rand = new Random();
+			int randomNumber = rand.nextInt(1);
+			
+			if(randomNumber == 0)
+			{
+				fabricaPremio = new FabricaPremio(mapaActual.getLimiteX(), mapaActual.getLimiteY(), jugador, infectados);
+				Entidad premio = fabricaPremio.crearEntidad();
+				
+				premio.setPosX(infectado.getPosX());
+				premio.setPosY(infectado.getPosY());
+				premiosAgregar.addLast(premio);
+			}
+			
+			mapaActual.eliminarEntidad(infectado);
+			infectado.eliminar();
+			infectados.remove(infectado);
+		}
+		infectadosEliminar.clear();
+	}
+
+	/*
+	 * Recorre ambas listas de infectados y entidades para verificar si colisionan con Jugador
+	 */
+	protected void chequearColisionJugador() 
+	{
+		for(Entidad otraEntidad : proyectiles)
+		{
+			if(jugador.chequearColision(otraEntidad))
+			{
+				Visitor visitorJugador = jugador.getVisitor();
+				otraEntidad.aceptar(visitorJugador);
+				
+				Visitor visitor = otraEntidad.getVisitor();
+				jugador.aceptar(visitor);
+			}
+		}
+		
+		for(Entidad infectado : infectados)
+		{
+			if(jugador.chequearColision(infectado))
+			{
+				Visitor visitorJugador = jugador.getVisitor();
+				infectado.aceptar(visitorJugador);
+				
+				Visitor visitor = infectado.getVisitor();
+				jugador.aceptar(visitor);
+			}
+		}
+		
+		for(Entidad entidad : premios)
+		{
+			if(jugador.chequearColision(entidad))
+			{
+				Premio premio = (Premio) entidad;
+				
+				premio.setInfectados(infectados);
+				
+				Visitor visitorJugador = jugador.getVisitor();
+				premio.aceptar(visitorJugador);
+				
+				Visitor visitor = premio.getVisitor();
+				jugador.aceptar(visitor);
+				
+				this.premiosEnEspera.addLast(premio);
+			}
 		}
 	}
 
@@ -195,7 +298,9 @@ public class Juego
 				}
 				
 				if(entidad2.listoParaEliminar() && !entidadesEliminar2.contains(entidad2))
+				{
 					entidadesEliminar2.addLast(entidad2);
+				}
 			}
 		}
 	}
@@ -237,12 +342,12 @@ public class Juego
 	 */
 	protected void agregarEntidades(LinkedList<Entidad> entidades, LinkedList<Entidad> entidadesAgregar)
 	{
-		for(Entidad entidad : entidadesOtrasAgregar)
+		for(Entidad entidad : entidadesAgregar)
 		{
-			entidadesOtras.addLast(entidad);
+			entidades.addLast(entidad);
 			mapaActual.insertarEntidad(entidad);
 			entidad.getContenedorGrafico().actualizar(entidad.getPosX(),entidad.getPosY());
 		}
-		entidadesOtrasAgregar.clear();
+		entidadesAgregar.clear();
 	}
 }

@@ -1,5 +1,8 @@
 package logica;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 public class HiloJuego extends Thread 
 {
 	//ATRIBUTOS
@@ -31,7 +34,16 @@ public class HiloJuego extends Thread
 				e.printStackTrace();
 			}
 			
-			elJuego.ejecutarJuego();
+			try 
+			{
+				elJuego.ejecutarJuego();
+			} 
+			catch (GameOverException e) 
+			{
+				JFrame f = new JFrame();  
+				JOptionPane.showMessageDialog(f,e.getMessage());
+				System.exit(1);
+			}
 		}
 	}
 }

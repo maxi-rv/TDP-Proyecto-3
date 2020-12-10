@@ -18,9 +18,8 @@ public class VisitorJugador implements Visitor
 
 	public void visitar(Infectado infectado) {}
 
-
-
-	public void visitar(Premio premio) {
+	public void visitar(Premio premio) 
+	{
 		premio.efecto();
 	}
 

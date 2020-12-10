@@ -39,7 +39,7 @@ public class Jugador extends Humano
 	@Override
 	public boolean listoParaEliminar() 
 	{
-		return this.cargaViral==10;
+		return this.cargaViral>=100;
 	}
 	
 	public Arma getArma(){
