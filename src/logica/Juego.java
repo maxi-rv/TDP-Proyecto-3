@@ -21,9 +21,11 @@ public class Juego
 	protected static Juego instancia;
 	protected Nivel nivelActual;
 	protected Mapa mapaActual;
-	protected LinkedList<Entidad> entidades;
-	protected LinkedList<Entidad> entidadesAgregar;
-	protected LinkedList<Entidad> entidadesEliminar;
+	protected LinkedList<Entidad> entidadesOtras;
+	protected LinkedList<Entidad> entidadesOtrasAgregar;
+	protected LinkedList<Entidad> entidadesOtrasEliminar;
+	protected LinkedList<Entidad> infectados;
+	protected LinkedList<Entidad> infectadosEliminar;
 	protected Jugador jugador;
 	protected Fabrica fabricaJugador;
 	protected Fabrica fabricaInfectado;
@@ -34,9 +36,12 @@ public class Juego
 	{
 		mapaActual = new Mapa(limX, limY);
 		
-		entidades = new LinkedList<Entidad>();
-		entidadesAgregar = new LinkedList<Entidad>();
-		entidadesEliminar = new LinkedList<Entidad>();
+		entidadesOtras = new LinkedList<Entidad>();
+		entidadesOtrasAgregar = new LinkedList<Entidad>();
+		entidadesOtrasEliminar = new LinkedList<Entidad>();
+		
+		infectados = new LinkedList<Entidad>();
+		infectadosEliminar = new LinkedList<Entidad>();
 		
 		fabricaJugador = new FabricaJugador(mapaActual.getLimiteX(), mapaActual.getLimiteY());
 		fabricaInfectado = new FabricaInfectado(mapaActual.getLimiteX(), mapaActual.getLimiteY());
@@ -86,7 +91,7 @@ public class Juego
 	{
 		Entidad proyectil = jugador.disparar();
 		
-		entidadesAgregar.addLast(proyectil);
+		entidadesOtrasAgregar.addLast(proyectil);
 	}
 	
 	/*
@@ -95,14 +100,14 @@ public class Juego
 	public void ejecutarJuego() 
 	{
 		//GENERA UN NUEVO NIVEL
-		if(nivelActual.nivelCompletado() && entidades.isEmpty())
+		if(nivelActual.nivelCompletado() && infectados.isEmpty())
 		{
 			this.nivelActual.generarNuevoNivel();
 			System.out.println("Nivel:"+nivelActual.getNumeroNivel());
 		}
 		
 		//CARGA UNA TANDA
-		if(nivelActual.quedanTandas() && entidades.isEmpty())
+		if(nivelActual.quedanTandas() && infectados.isEmpty())
 		{
 			cargarTanda();
 		}
@@ -129,7 +134,7 @@ public class Juego
 			mapaActual.insertarEntidad(infectado);
 			infectado.getContenedorGrafico().actualizar(infectado.getPosX(), infectado.getPosY());
 			
-			entidades.addLast(infectado);
+			infectados.addLast(infectado);
 			
 			System.out.println(i);
 		}
@@ -137,51 +142,68 @@ public class Juego
 
 	protected void jugarRonda() 
 	{
-		if(!entidades.isEmpty())
+		if(!infectados.isEmpty())
 		{
-			/*
-			 * Este ciclo se encarga de recorrer todas las entidades, realizar 
-			 * sus comportamientos correspondientes, chequear colisiones,
-			 * y preparar las entidades necesarias para añadir o eliminar.
-			 */
-			for(Entidad entidad : entidades)
-			{
-				Entidad nuevaEnt = entidad.ejecutarComportamiento();
-				
-				if(nuevaEnt!=null)
-					entidadesAgregar.addLast(nuevaEnt);
-				
-				chequearColisiones(entidad);
-				
-				if(entidad.listoParaEliminar())
-					entidadesEliminar.addLast(entidad);
-			}
 			
-			/*
-			 * Este ciclo se encarga de eliminar todas las entidades correspondientes.
-			 */
-			for(Entidad entidad : entidadesEliminar)
-			{
-				mapaActual.eliminarEntidad(entidad);
-				entidad.eliminar();
-				entidades.remove(entidad);
-			}
-			entidadesEliminar.clear();
+			this.realizarComportamiento(entidadesOtras, entidadesOtrasAgregar, entidadesOtrasEliminar);
+			this.realizarComportamiento(infectados, entidadesOtrasAgregar, infectadosEliminar);
 			
-			/*
-			 * Este ciclo se encarga de agregar todas las entidades correspondientes.
-			 */
-			for(Entidad entidad : entidadesAgregar)
-			{
-				entidades.addLast(entidad);
-				mapaActual.insertarEntidad(entidad);
-				entidad.getContenedorGrafico().actualizar(entidad.getPosX(),entidad.getPosY());
-			}
-			entidadesAgregar.clear();
+			this.chequearColisionesCruzado(entidadesOtras, infectados, entidadesOtrasAgregar, infectadosEliminar);
+			this.chequearColisionesCruzado(infectados, entidadesOtras, entidadesOtrasAgregar, entidadesOtrasEliminar);
+			
+			this.eliminarEntidades(entidadesOtras, entidadesOtrasEliminar);
+			this.eliminarEntidades(infectados, infectadosEliminar);
+			
+			this.agregarEntidades(entidadesOtras, entidadesOtrasAgregar);
 		}
 	}
 
-	private void chequearColisiones(Entidad entidad) 
+	/*
+	 * Este metodo se encarga de recorrer todas las entidades, realizar 
+	 * sus comportamientos correspondientes, chequear colisiones,
+	 * y preparar las entidades necesarias para añadir o eliminar.
+	 */
+	protected void realizarComportamiento(LinkedList<Entidad> entidades, LinkedList<Entidad> entidadesAgregar, LinkedList<Entidad> entidadesEliminar)
+	{
+		for(Entidad entidad : entidades)
+		{
+			Entidad nuevaEnt = entidad.ejecutarComportamiento();
+			
+			if(nuevaEnt!=null)
+				entidadesAgregar.addLast(nuevaEnt);
+			
+			chequearColisiones(entidad, entidades);
+			
+			if(entidad.listoParaEliminar())
+				entidadesEliminar.addLast(entidad);
+		}
+	}
+	
+	/*
+	 * Chequea colisiones entre 2 listas de entidades distintas
+	 */
+	protected void chequearColisionesCruzado(LinkedList<Entidad> entidades1, LinkedList<Entidad> entidades2, LinkedList<Entidad> entidadesAgregar1, LinkedList<Entidad> entidadesEliminar2)
+	{
+		for(Entidad entidad1 : entidades1)
+		{
+			for(Entidad entidad2 : entidades2)
+			{
+				if(entidad1.chequearColision(entidad2))
+				{
+					Visitor visitor = entidad2.getVisitor();
+					entidad1.aceptar(visitor);
+				}
+				
+				if(entidad2.listoParaEliminar() && !entidadesEliminar2.contains(entidad2))
+					entidadesEliminar2.addLast(entidad2);
+			}
+		}
+	}
+	
+	/*
+	 * Recibe una entidad y chequea si ha colisionado con las entidades en la lista pasada por parametro.
+	 */
+	protected void chequearColisiones(Entidad entidad, LinkedList<Entidad> entidades) 
 	{
 		for(Entidad otraEntidad : entidades)
 		{
@@ -194,5 +216,33 @@ public class Juego
 				}
 			}
 		}
+	}
+	
+	/*
+	 * Este metodo se encarga de eliminar todas las entidades correspondientes.
+	 */
+	protected void eliminarEntidades(LinkedList<Entidad> entidades, LinkedList<Entidad> entidadesEliminar)
+	{
+		for(Entidad entidad : entidadesEliminar)
+		{
+			mapaActual.eliminarEntidad(entidad);
+			entidad.eliminar();
+			entidades.remove(entidad);
+		}
+		entidadesEliminar.clear();
+	}
+	
+	/*
+	 * Este ciclo se encarga de agregar todas las entidades correspondientes.
+	 */
+	protected void agregarEntidades(LinkedList<Entidad> entidades, LinkedList<Entidad> entidadesAgregar)
+	{
+		for(Entidad entidad : entidadesOtrasAgregar)
+		{
+			entidadesOtras.addLast(entidad);
+			mapaActual.insertarEntidad(entidad);
+			entidad.getContenedorGrafico().actualizar(entidad.getPosX(),entidad.getPosY());
+		}
+		entidadesOtrasAgregar.clear();
 	}
 }

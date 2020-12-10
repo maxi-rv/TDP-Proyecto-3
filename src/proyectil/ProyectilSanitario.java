@@ -15,7 +15,7 @@ public class ProyectilSanitario extends Proyectil
 		this.damage = 1;
 		this.contenedorGrafico = new ContenedorGraficoProyectilSanitario();
 		this.velocidad = 15;
-		
+		this.listoParaEliminar = false;
 		this.visitor = new VisitorProyectilSanitario(this);
 	}
 	
@@ -44,6 +44,6 @@ public class ProyectilSanitario extends Proyectil
 	@Override
 	public boolean listoParaEliminar() 
 	{
-		return (posY == 0);
+		return (posY==0) || listoParaEliminar;
 	}
 }

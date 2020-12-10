@@ -17,4 +17,6 @@ public interface Visitor
 	public abstract void visitar(Particula particula);
 	
 	public abstract void visitar(ProyectilSanitario proyectil);
+	
+	public abstract void eliminar();
 }

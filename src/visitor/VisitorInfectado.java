@@ -18,25 +18,22 @@ public class VisitorInfectado implements Visitor
 		this.infectado = infectado;
 	}
 
-	@Override
 	public void visitar(Jugador jugador) 
 	{
 		jugador.aumentarCargaViral(infectado.getCloseDamage());
 	}
-
 	
 	public void visitar(Infectado infectado) {}
 
-
 	public void visitar(Premio premio) {}
-
 
 	public void visitar(Particula particula) {}
 
+	public void visitar(ProyectilSanitario proyectil) {}
 
-	public void visitar(ProyectilSanitario proyectil) 
+	public void eliminar() 
 	{
-		infectado.reducirCargaViral(proyectil.getDamage());
+		infectado = null;
 	}
 
 }

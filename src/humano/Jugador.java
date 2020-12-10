@@ -14,7 +14,7 @@ public class Jugador extends Humano
 		this.arma = ar;
 		this.contenedorGrafico = new ContenedorGraficoJugador();
 		this.velocidad = 15;
-		this.visitor = new VisitorJugador(this);
+		this.visitor = new VisitorJugador();
 	}
 	
 	//METODOS

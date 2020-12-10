@@ -44,11 +44,15 @@ public class Mapa
 	public void insertarEntidad(Entidad entidad)
 	{
 		panelMapa.add(entidad.getContenedorGrafico().getLabel());
+		panelMapa.validate();
+		panelMapa.repaint();
 	}
 	
 	public void eliminarEntidad(Entidad entidad)
 	{
 		panelMapa.remove(entidad.getContenedorGrafico().getLabel());
+		panelMapa.validate();
+		panelMapa.repaint();
 	}
 	
 	public JPanel getPanel()
