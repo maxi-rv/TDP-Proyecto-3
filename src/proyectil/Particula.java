@@ -7,6 +7,6 @@ public abstract class Particula extends Proyectil
 	
 	public boolean listoParaEliminar() 
 	{
-		return (posY+this.contenedorGrafico.getLabel().getHeight() == limiteY) || (recorrido>=rango);
+		return (posY+this.contenedorGrafico.getLabel().getHeight()==limiteY) || (recorrido>=rango) || (listoParaEliminar);
 	}
 }

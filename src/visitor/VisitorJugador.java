@@ -9,32 +9,25 @@ import proyectil.ProyectilSanitario;
 
 public class VisitorJugador implements Visitor
 {
-	private Jugador jugador;
-	
-	public VisitorJugador (Jugador j) {
-		jugador=j;
+	public VisitorJugador () 
+	{
+		
 	}
 
 	public void visitar(Jugador jugador) {}
 
-	@Override
 	public void visitar(Infectado infectado) {}
 
-
-	public void visitar(Premio premio) {
+	public void visitar(Premio premio) 
+	{
 		premio.efecto();
 	}
-
 	
-	public void visitar(Particula particula) {
-		jugador.aumentarCargaViral(particula.clone().getDamage());
-		
-	}
-
+	public void visitar(Particula particula) {}
 	
 	public void visitar(ProyectilSanitario proyectil) {}
-
 	
 	public void visitar(Juego juego) {}
-
+	
+	public void eliminar() {}
 }

@@ -17,7 +17,7 @@ public class ParticulaBeta extends Particula
 		this.velocidad = 7;
 		this.rango = 350;
 		this.recorrido = 0;
-		
+		this.listoParaEliminar = false;
 		this.visitor = new VisitorParticula(this);
 	}
 	

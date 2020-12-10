@@ -30,6 +30,8 @@ public abstract class Entidad
 	{
 		contenedorGrafico.eliminar();
 		contenedorGrafico = null;
+		visitor.eliminar();
+		visitor = null;
 	}
 	
 	public abstract boolean listoParaEliminar();
