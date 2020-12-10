@@ -102,6 +102,11 @@ public abstract class Entidad
 	{
 		this.limiteY = limiteY;
 	}
+	
+	public void setVelocidad(int velocidad) 
+	{
+		this.velocidad = velocidad;
+	}
 
 	public int getVelocidad() 
 	{

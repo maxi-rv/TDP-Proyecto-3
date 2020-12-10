@@ -37,20 +37,23 @@ public class FabricaPremio extends Fabrica
 		if(randomNumber==0)
 		{
 			premio.setEstrategia(new CuarentenaObligatoria());
+			premio.setVelocidad(4);
 			premio.setContenedorGrafico(new ContenedorGraficoCuarentenaObligatoria());
 		}
 		else if(randomNumber==1)
 		{
 			premio.setEstrategia(new SuperArmaSanitaria());
+			premio.setVelocidad(3);
 			premio.setContenedorGrafico(new ContenedorGraficoSuperArmaSanitaria());
 		}
 		else if(randomNumber==2)
 		{
 			premio.setEstrategia(new PocionVida());
+			premio.setVelocidad(5);
 			premio.setContenedorGrafico(new ContenedorGraficoPocionVida());
 		}
 		
-		premio.setLimiteX(limiteX); // Cuando verifique si el premio llego a tal sitio en realida hay que verificar si la estrategia llego?
+		premio.setLimiteX(limiteX);
 		premio.setLimiteY(limiteY);
 		
 		return premio;

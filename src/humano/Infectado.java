@@ -6,6 +6,7 @@ public abstract class Infectado extends Humano
 {
 	protected int closeDamage;
 	protected long tiempoInicial;
+	protected int velocidadGuardada;
 	
 	//METODOS
 	public Entidad ejecutarComportamiento()
@@ -59,12 +60,13 @@ public abstract class Infectado extends Humano
 		return toReturn;
 	}
 	
-	public void detener(){
+	public void detener()
+	{
 		velocidad = 0;		
 	}
 	
-	public void reanudar(){
-		
-		velocidad = 1;
+	public void reanudar()
+	{
+		velocidad = velocidadGuardada;
 	}
 }

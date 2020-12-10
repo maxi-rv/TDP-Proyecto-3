@@ -20,7 +20,6 @@ public class Premio extends Entidad{
 	public Premio(Jugador j)
 	{
 		this.jugador = j;
-		this.velocidad = 2;
 		this.visitor = new VisitorPremio(this);
 		this.listoParaEliminar = false;
 	}

@@ -20,7 +20,7 @@ public class ContenedorGraficoSuperArmaSanitaria extends ContenedorGrafico
 		BufferedImage imagenOriginal = null;
 		try 
 		{
-			imagenOriginal = ImageIO.read(new File("src/Sprites/House.png"));
+			imagenOriginal = ImageIO.read(new File("src/Sprites/Botiquin.png"));
 		} 
 		catch (IOException e) 
 		{

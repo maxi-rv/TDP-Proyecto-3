@@ -167,54 +167,71 @@ public class Juego
 			this.agregarEntidades(premios, premiosAgregar);
 		}
 	}
-	
-	private void eliminarPremios() 
-	{
-		for(Entidad premio : premiosEnEspera)
-		{
-			premios.remove(premio);
-			mapaActual.eliminarEntidad(premio);
-			
-			if(premio.listoParaEliminar())
-			{
-				premiosEliminar.addLast(premio);
-			}	
-		}
-		
-		for(Entidad premio : premiosEliminar)
-		{
-			premio.eliminar();
-			premiosEnEspera.remove(premio);
-		}
-		premiosEliminar.clear();
-	}
-
-	private void eliminarInfectados() 
-	{
-		for(Entidad infectado : infectadosEliminar)
-		{
-			Random rand = new Random();
-			int randomNumber = rand.nextInt(1);
-			
-			if(randomNumber == 0)
-			{
-				fabricaPremio = new FabricaPremio(mapaActual.getLimiteX(), mapaActual.getLimiteY(), jugador, infectados);
-				Entidad premio = fabricaPremio.crearEntidad();
-				
-				premio.setPosX(infectado.getPosX());
-				premio.setPosY(infectado.getPosY());
-				premiosAgregar.addLast(premio);
-			}
-			
-			mapaActual.eliminarEntidad(infectado);
-			infectado.eliminar();
-			infectados.remove(infectado);
-		}
-		infectadosEliminar.clear();
-	}
 
 	/*
-	 * Recorre ambas listas de infectados y entidades para verificar si colisionan con Jugador
+	 * Este metodo se encarga de recorrer todas las entidades, realizar 
+	 * sus comportamientos correspondientes, chequear colisiones,
+	 * y preparar las entidades necesarias para añadir o eliminar.
+	 */
+	protected void realizarComportamiento(LinkedList<Entidad> entidades, LinkedList<Entidad> entidadesAgregar, LinkedList<Entidad> entidadesEliminar)
+	{
+		for(Entidad entidad : entidades)
+		{
+			Entidad nuevaEnt = entidad.ejecutarComportamiento();
+			
+			if(nuevaEnt!=null)
+				entidadesAgregar.addLast(nuevaEnt);
+			
+			chequearColisiones(entidad, entidades);
+			
+			if(entidad.listoParaEliminar())
+				entidadesEliminar.addLast(entidad);
+		}
+	}
+	
+	/*
+	 * Recibe una entidad y chequea si ha colisionado con las entidades en la lista pasada por parametro.
+	 */
+	protected void chequearColisiones(Entidad entidad, LinkedList<Entidad> entidades) 
+	{
+		for(Entidad otraEntidad : entidades)
+		{
+			if(entidad != otraEntidad)
+			{
+				if(entidad.chequearColision(otraEntidad))
+				{
+					Visitor visitor = entidad.getVisitor();
+					otraEntidad.aceptar(visitor);
+				}
+			}
+		}
+	}
+	
+	/*
+	 * Chequea colisiones entre 2 listas de entidades distintas
+	 */
+	protected void chequearColisionesCruzado(LinkedList<Entidad> entidades1, LinkedList<Entidad> entidades2, LinkedList<Entidad> entidadesAgregar1, LinkedList<Entidad> entidadesEliminar2)
+	{
+		for(Entidad entidad1 : entidades1)
+		{
+			for(Entidad entidad2 : entidades2)
+			{
+				if(entidad1.chequearColision(entidad2))
+				{
+					Visitor visitor = entidad2.getVisitor();
+					entidad1.aceptar(visitor);
+				}
+				
+				if(entidad2.listoParaEliminar() && !entidadesEliminar2.contains(entidad2))
+				{
+					entidadesEliminar2.addLast(entidad2);
+				}
+			}
+		}
+	}
+	
+	/*
+	 * Recorre todas listas de infectados, proyectiles, y premios, para verificar si colisionan con Jugador
 	 */
 	protected void chequearColisionJugador() 
 	{
@@ -260,71 +277,9 @@ public class Juego
 			}
 		}
 	}
-
-	/*
-	 * Este metodo se encarga de recorrer todas las entidades, realizar 
-	 * sus comportamientos correspondientes, chequear colisiones,
-	 * y preparar las entidades necesarias para añadir o eliminar.
-	 */
-	protected void realizarComportamiento(LinkedList<Entidad> entidades, LinkedList<Entidad> entidadesAgregar, LinkedList<Entidad> entidadesEliminar)
-	{
-		for(Entidad entidad : entidades)
-		{
-			Entidad nuevaEnt = entidad.ejecutarComportamiento();
-			
-			if(nuevaEnt!=null)
-				entidadesAgregar.addLast(nuevaEnt);
-			
-			chequearColisiones(entidad, entidades);
-			
-			if(entidad.listoParaEliminar())
-				entidadesEliminar.addLast(entidad);
-		}
-	}
 	
 	/*
-	 * Chequea colisiones entre 2 listas de entidades distintas
-	 */
-	protected void chequearColisionesCruzado(LinkedList<Entidad> entidades1, LinkedList<Entidad> entidades2, LinkedList<Entidad> entidadesAgregar1, LinkedList<Entidad> entidadesEliminar2)
-	{
-		for(Entidad entidad1 : entidades1)
-		{
-			for(Entidad entidad2 : entidades2)
-			{
-				if(entidad1.chequearColision(entidad2))
-				{
-					Visitor visitor = entidad2.getVisitor();
-					entidad1.aceptar(visitor);
-				}
-				
-				if(entidad2.listoParaEliminar() && !entidadesEliminar2.contains(entidad2))
-				{
-					entidadesEliminar2.addLast(entidad2);
-				}
-			}
-		}
-	}
-	
-	/*
-	 * Recibe una entidad y chequea si ha colisionado con las entidades en la lista pasada por parametro.
-	 */
-	protected void chequearColisiones(Entidad entidad, LinkedList<Entidad> entidades) 
-	{
-		for(Entidad otraEntidad : entidades)
-		{
-			if(entidad != otraEntidad)
-			{
-				if(entidad.chequearColision(otraEntidad))
-				{
-					Visitor visitor = entidad.getVisitor();
-					otraEntidad.aceptar(visitor);
-				}
-			}
-		}
-	}
-	
-	/*
-	 * Este metodo se encarga de eliminar todas las entidades correspondientes.
+	 * Este metodo se encarga de eliminar todas las entidades correspondientes que se pasan por parametro en la lista entidades.
 	 */
 	protected void eliminarEntidades(LinkedList<Entidad> entidades, LinkedList<Entidad> entidadesEliminar)
 	{
@@ -335,6 +290,57 @@ public class Juego
 			entidades.remove(entidad);
 		}
 		entidadesEliminar.clear();
+	}
+	
+	/*
+	 * 
+	 */
+	private void eliminarPremios() 
+	{
+		for(Entidad premio : premiosEnEspera)
+		{
+			premios.remove(premio);
+			mapaActual.eliminarEntidad(premio);
+			
+			if(premio.listoParaEliminar())
+			{
+				premiosEliminar.addLast(premio);
+			}	
+		}
+		
+		for(Entidad premio : premiosEliminar)
+		{
+			premio.eliminar();
+			premiosEnEspera.remove(premio);
+		}
+		premiosEliminar.clear();
+	}
+	
+	/*
+	 * 
+	 */
+	private void eliminarInfectados() 
+	{
+		for(Entidad infectado : infectadosEliminar)
+		{
+			Random rand = new Random();
+			int randomNumber = rand.nextInt(2);
+			
+			if(randomNumber == 0)
+			{
+				fabricaPremio = new FabricaPremio(mapaActual.getLimiteX(), mapaActual.getLimiteY(), jugador, infectados);
+				Entidad premio = fabricaPremio.crearEntidad();
+				
+				premio.setPosX(infectado.getPosX());
+				premio.setPosY(infectado.getPosY());
+				premiosAgregar.addLast(premio);
+			}
+			
+			mapaActual.eliminarEntidad(infectado);
+			infectado.eliminar();
+			infectados.remove(infectado);
+		}
+		infectadosEliminar.clear();
 	}
 	
 	/*

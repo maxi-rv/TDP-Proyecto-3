@@ -14,7 +14,8 @@ public class PocionVida  implements Estrategia{
 		recuperarVida(jugador, premio);
 	}
 	
-	private void recuperarVida(Jugador jugador, Premio premio){
+	private void recuperarVida(Jugador jugador, Premio premio)
+	{
 		int cura;
 		
 		cura = -75;

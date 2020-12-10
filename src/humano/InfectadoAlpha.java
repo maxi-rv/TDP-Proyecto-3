@@ -16,6 +16,7 @@ public class InfectadoAlpha extends Infectado
 		this.arma = ar;
 		this.contenedorGrafico = new ContenedorGraficoInfectadoAlpha();
 		this.velocidad = 1;
+		this.velocidadGuardada = velocidad;
 		this.closeDamage = 1;
 		this.visitor = new VisitorInfectado(this);
 		this.cargaViral = 3;
@@ -52,7 +53,17 @@ public class InfectadoAlpha extends Infectado
 	{
 		if (!velocidadDuplicada) 
 		{
-			velocidad = 2 * velocidad;
+			if(velocidad==0)
+			{
+				velocidadGuardada = 2 * velocidadGuardada;
+			}
+			else
+			{
+				velocidad = 2 * velocidadGuardada;
+				velocidadGuardada = velocidad;
+			}
+			
+			
 			velocidadDuplicada = true;
 		}
 	}

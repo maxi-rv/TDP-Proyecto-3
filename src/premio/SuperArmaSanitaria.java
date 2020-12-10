@@ -31,15 +31,9 @@ public class SuperArmaSanitaria  implements Estrategia
 				jugador.getArma().getProyectil().normalizarDaño();
 				premio.prepararParaEliminar();
 			}
-			
-			
-			
 		};
 		
 		timer.schedule(tarea,15000);
-		
-		
-		
 	}
 
 	

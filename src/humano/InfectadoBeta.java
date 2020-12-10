@@ -13,10 +13,10 @@ public class InfectadoBeta extends Infectado
 		this.arma = ar;
 		this.contenedorGrafico = new ContenedorGraficoInfectadoBeta();
 		this.velocidad = 1;
+		this.velocidadGuardada = velocidad;
 		this.closeDamage = 1;
 		this.visitor = new VisitorInfectado(this);
 		this.cargaViral = 6;
-		
 		this.tiempoInicial = System.currentTimeMillis();
 	}	
 	
