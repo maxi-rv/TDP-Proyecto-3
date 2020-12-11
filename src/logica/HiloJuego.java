@@ -34,16 +34,9 @@ public class HiloJuego extends Thread
 				e.printStackTrace();
 			}
 			
-			try 
-			{
-				elJuego.ejecutarJuego();
-			} 
-			catch (GameOverException e) 
-			{
-				JFrame f = new JFrame();  
-				JOptionPane.showMessageDialog(f,e.getMessage());
-				System.exit(1);
-			}
+			//AGREGAR 2 IFs y CERRAR JUEGO SI ALGUNO ES TRUE
+			
+			elJuego.ejecutarJuego();
 		}
 	}
 }

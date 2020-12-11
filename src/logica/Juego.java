@@ -106,7 +106,7 @@ public class Juego
 	/*
 	 * Esto deberia ejectuarse en un hilo.
 	 */
-	public void ejecutarJuego() throws GameOverException 
+	public void ejecutarJuego()
 	{
 		//GENERA UN NUEVO NIVEL
 		if(nivelActual.nivelCompletado() && infectados.isEmpty())
@@ -144,11 +144,8 @@ public class Juego
 		}
 	}
 
-	protected void jugarRonda() throws GameOverException 
+	protected void jugarRonda()
 	{
-		if(jugador.listoParaEliminar())
-			throw new GameOverException("GAME OVER!");
-		
 		if(!infectados.isEmpty())
 		{
 			this.realizarComportamiento(proyectiles, proyectilesAgregar, proyectilesEliminar);
@@ -355,5 +352,15 @@ public class Juego
 			entidad.getContenedorGrafico().actualizar(entidad.getPosX(),entidad.getPosY());
 		}
 		entidadesAgregar.clear();
+	}
+	
+	public boolean juegoPerdido()
+	{
+		return false;
+	}
+	
+	public boolean juegoGanado()
+	{
+		return false;
 	}
 }

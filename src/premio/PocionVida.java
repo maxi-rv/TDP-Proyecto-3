@@ -16,11 +16,15 @@ public class PocionVida  implements Estrategia{
 	
 	private void recuperarVida(Jugador jugador, Premio premio)
 	{
-		int cura;
+		int cura; int cargaViral;
 		
-		cura = -75;
+		cura = 75;
+		cargaViral = jugador.getCargaViral();
 		
-		jugador.aumentarCargaViral(cura);
+		if((cargaViral - cura) < 0)
+			jugador.aumentarCargaViral(-(cargaViral));
+		else 
+			jugador.aumentarCargaViral(-(cura));
 		
 		premio.listoParaEliminar();
 	}

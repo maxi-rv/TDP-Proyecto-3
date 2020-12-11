@@ -12,7 +12,7 @@ public class ParticulaAlpha extends Particula
 	 */
 	public ParticulaAlpha()
 	{
-		this.damage = 1;
+		this.damage = 3;
 		this.contenedorGrafico = new ContenedorGraficoParticula();
 		this.velocidad = 7;
 		this.rango = 350;

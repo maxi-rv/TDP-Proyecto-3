@@ -23,5 +23,8 @@ public abstract class Humano extends Entidad
 		return proyectil;
 	}
 	
-	
+	public int getCargaViral()
+	{
+		return cargaViral;
+	}
 }
