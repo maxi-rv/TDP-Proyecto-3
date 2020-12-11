@@ -36,7 +36,21 @@ public class HiloJuego extends Thread
 			
 			//AGREGAR 2 IFs y CERRAR JUEGO SI ALGUNO ES TRUE
 			
+			if(elJuego.juegoPerdido()) {
+				JFrame f = new JFrame();
+				JOptionPane.showMessageDialog(f,"Game Over!");
+				System.exit(1);				
+			}
+			
+			if(elJuego.juegoGanado()) {
+				JFrame f = new JFrame();
+				JOptionPane.showMessageDialog(f,"¡Has ganado el juego!");
+				System.exit(1);
+			}	
+			
 			elJuego.ejecutarJuego();
+			
+			
 		}
 	}
 }

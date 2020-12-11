@@ -3,6 +3,9 @@ package logica;
 import java.util.LinkedList;
 import java.util.Random;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import fabrica.Fabrica;
 import fabrica.FabricaInfectado;
 import fabrica.FabricaJugador;
@@ -115,7 +118,7 @@ public class Juego
 		}
 		
 		//CARGA UNA TANDA
-		if(nivelActual.quedanTandas() && infectados.isEmpty())
+		if(nivelActual.quedanTandas() && infectados.isEmpty() && !this.juegoGanado())
 		{
 			cargarTanda();
 		}
@@ -146,8 +149,12 @@ public class Juego
 
 	protected void jugarRonda()
 	{
+		
+		
 		if(!infectados.isEmpty())
 		{
+			
+			
 			this.realizarComportamiento(proyectiles, proyectilesAgregar, proyectilesEliminar);
 			this.realizarComportamiento(infectados, proyectilesAgregar, infectadosEliminar);
 			this.realizarComportamiento(premios, premiosAgregar, premiosEnEspera);
@@ -356,11 +363,20 @@ public class Juego
 	
 	public boolean juegoPerdido()
 	{
-		return false;
+		boolean perdido;
+		
+		perdido = jugador.listoParaEliminar();
+		
+		return perdido;
+		
 	}
 	
 	public boolean juegoGanado()
 	{
-		return false;
+		boolean ganado;
+		
+		ganado = (nivelActual.getNumeroNivel() == 10 );
+		
+		return ganado;
 	}
 }
